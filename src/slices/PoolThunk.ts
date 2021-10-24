@@ -1,8 +1,8 @@
 import { ethers } from "ethers";
 import { addresses } from "../constants";
-import { abi as ierc20Abi } from "../abi/IERC20.json";
-import { abi as PrizePool } from "../abi/33-together/PrizePoolAbi2.json";
-import { abi as AwardPool } from "../abi/33-together/AwardAbi2.json";
+import { abi as ierc20ABI } from "../abi/IERC20.json";
+import { abi as PrizePoolABI } from "../abi/33-together/PrizePoolAbi2.json";
+import { abi as AwardAbi2ABI } from "../abi/33-together/AwardAbi2.json";
 import { createAsyncThunk, createSelector, createSlice } from "@reduxjs/toolkit";
 import { clearPendingTxn, fetchPendingTxns } from "./PendingTxnsSlice";
 import { fetchAccountSuccess, getBalances } from "./AccountSlice";
@@ -18,7 +18,7 @@ import {
   IActionAsyncThunk,
   IJsonRPCError,
 } from "./interfaces";
-import { SOlympus, MultipleWinners, StakePrizePool } from "../typechain";
+import { AwardAbi2, IERC20, PrizePoolAbi } from "../typechain";
 
 export const getPoolValues = createAsyncThunk(
   "pool/getPoolValues",
@@ -26,9 +26,9 @@ export const getPoolValues = createAsyncThunk(
     // calculate 33-together
     const poolReader = new ethers.Contract(
       addresses[networkID].PT_PRIZE_POOL_ADDRESS,
-      PrizePool,
+      PrizePoolABI,
       provider,
-    ) as StakePrizePool;
+    ) as PrizePoolAbi;
     const poolAwardBalance = await poolReader.callStatic.captureAwardBalance();
     const creditPlanOf = await poolReader.creditPlanOf(addresses[networkID].PT_TOKEN_ADDRESS);
     const poolCredit = getCreditMaturationDaysAndLimitPercentage(
@@ -38,9 +38,9 @@ export const getPoolValues = createAsyncThunk(
 
     const awardReader = new ethers.Contract(
       addresses[networkID].PT_PRIZE_STRATEGY_ADDRESS,
-      AwardPool,
+      AwardAbi2ABI,
       provider,
-    ) as MultipleWinners;
+    ) as AwardAbi2;
     const poolAwardPeriodRemainingSeconds = await awardReader.prizePeriodRemainingSeconds();
 
     return {
@@ -55,9 +55,9 @@ export const getPoolValues = createAsyncThunk(
 export const getRNGStatus = createAsyncThunk("pool/getRNGStatus", async ({ networkID, provider }: IBaseAsyncThunk) => {
   const awardReader = new ethers.Contract(
     addresses[networkID].PT_PRIZE_STRATEGY_ADDRESS,
-    AwardPool,
+    AwardAbi2ABI,
     provider,
-  ) as MultipleWinners;
+  ) as AwardAbi2;
   const isRngRequested = await awardReader.isRngRequested();
   let isRngTimedOut = false;
   if (isRngRequested) isRngTimedOut = await awardReader.isRngTimedOut();
@@ -78,7 +78,7 @@ export const changeApproval = createAsyncThunk(
     }
 
     const signer = provider.getSigner();
-    const sohmContract = new ethers.Contract(addresses[networkID].SOHM_ADDRESS, ierc20Abi, signer) as SOlympus;
+    const sohmContract = new ethers.Contract(addresses[networkID].SOHM_ADDRESS, ierc20ABI, signer) as IERC20;
 
     let approveTx;
     try {
@@ -127,9 +127,9 @@ export const poolDeposit = createAsyncThunk(
     const signer = provider.getSigner();
     const poolContract = new ethers.Contract(
       addresses[networkID].PT_PRIZE_POOL_ADDRESS,
-      PrizePool,
+      PrizePoolABI,
       signer,
-    ) as StakePrizePool;
+    ) as PrizePoolAbi;
     let poolTx;
 
     try {
@@ -172,9 +172,9 @@ export const getEarlyExitFee = createAsyncThunk(
   async ({ value, provider, address, networkID }: IValueAsyncThunk) => {
     const poolReader = new ethers.Contract(
       addresses[networkID].PT_PRIZE_POOL_ADDRESS,
-      PrizePool,
+      PrizePoolABI,
       provider,
-    ) as StakePrizePool;
+    ) as PrizePoolAbi;
     // NOTE (appleseed): we chain callStatic in the below function to force the transaction through w/o a gas fee
     // ... this may be a result of `calculateEarlyExitFee` not being explicity declared as `view` or `pure` in the contract.
     // Explanation from ethers docs: https://docs.ethers.io/v5/api/contract/contract/#contract-callStatic
@@ -214,9 +214,9 @@ export const poolWithdraw = createAsyncThunk(
     const signer = provider.getSigner();
     const poolContract = new ethers.Contract(
       addresses[networkID].PT_PRIZE_POOL_ADDRESS,
-      PrizePool,
+      PrizePoolABI,
       signer,
-    ) as StakePrizePool;
+    ) as PrizePoolAbi;
 
     let poolTx;
 
@@ -269,9 +269,9 @@ export const awardProcess = createAsyncThunk(
     const signer = provider.getSigner();
     const poolContract = new ethers.Contract(
       addresses[networkID].PT_PRIZE_STRATEGY_ADDRESS,
-      AwardPool,
+      AwardAbi2ABI,
       signer,
-    ) as MultipleWinners;
+    ) as AwardAbi2;
 
     let poolTx;
 

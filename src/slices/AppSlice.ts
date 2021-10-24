@@ -4,11 +4,10 @@ import { createSlice, createSelector, createAsyncThunk } from "@reduxjs/toolkit"
 import apollo from "../lib/apolloClient";
 import { RootState } from "../store";
 import { addresses } from "../constants";
-import { abi as OlympusStakingv2 } from "../abi/OlympusStakingv2.json";
-import { abi as sOHMv2 } from "../abi/sOhmv2.json";
+import { abi as OlympusStakingv2ABI } from "../abi/OlympusStakingv2.json";
+import { abi as sOHMv2ABI } from "../abi/sOhmv2.json";
 import { setAll, getTokenPrice, getMarketPrice } from "../helpers";
-import { SOlympus } from "../typechain/SOlympus";
-import { OlympusStaking } from "../typechain/OlympusStaking";
+import { OlympusStakingv2, SOhmv2 } from "../typechain";
 import { IBaseAsyncThunk } from "./interfaces";
 
 const initialState = {
@@ -81,15 +80,15 @@ export const loadAppDetails = createAsyncThunk(
 
     const stakingContract = new ethers.Contract(
       addresses[networkID].STAKING_ADDRESS as string,
-      OlympusStakingv2,
+      OlympusStakingv2ABI,
       provider,
-    ) as OlympusStaking;
+    ) as OlympusStakingv2;
 
     const sohmMainContract = new ethers.Contract(
       addresses[networkID].SOHM_ADDRESS as string,
-      sOHMv2,
+      sOHMv2ABI,
       provider,
-    ) as SOlympus;
+    ) as SOhmv2;
 
     // Calculating staking
     const epoch = await stakingContract.epoch();

@@ -21,177 +21,108 @@ import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface OlympusStakingInterface extends ethers.utils.Interface {
   functions: {
-    "OHM()": FunctionFragment;
-    "claim(address)": FunctionFragment;
-    "contractBalance()": FunctionFragment;
-    "distributor()": FunctionFragment;
-    "epoch()": FunctionFragment;
-    "forfeit()": FunctionFragment;
-    "giveLockBonus(uint256)": FunctionFragment;
-    "index()": FunctionFragment;
-    "locker()": FunctionFragment;
-    "manager()": FunctionFragment;
-    "pullManagement()": FunctionFragment;
-    "pushManagement(address)": FunctionFragment;
-    "rebase()": FunctionFragment;
-    "renounceManagement()": FunctionFragment;
-    "returnLockBonus(uint256)": FunctionFragment;
+    "epochLengthInBlocks()": FunctionFragment;
+    "initialize(address,address,uint8)": FunctionFragment;
+    "ohm()": FunctionFragment;
+    "ohmToDistributeNextEpoch()": FunctionFragment;
+    "owner()": FunctionFragment;
+    "renounceOwnership()": FunctionFragment;
     "sOHM()": FunctionFragment;
-    "setContract(uint8,address)": FunctionFragment;
-    "setWarmup(uint256)": FunctionFragment;
-    "stake(uint256,address)": FunctionFragment;
-    "toggleDepositLock()": FunctionFragment;
-    "totalBonus()": FunctionFragment;
-    "unstake(uint256,bool)": FunctionFragment;
-    "warmupContract()": FunctionFragment;
-    "warmupInfo(address)": FunctionFragment;
-    "warmupPeriod()": FunctionFragment;
+    "setEpochLengthintBlock(uint256)": FunctionFragment;
+    "stakeOHM(uint256)": FunctionFragment;
+    "stakeOHMWithPermit(uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
+    "unstakeOHM(uint256)": FunctionFragment;
+    "unstakeOHMWithPermit(uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: "OHM", values?: undefined): string;
-  encodeFunctionData(functionFragment: "claim", values: [string]): string;
   encodeFunctionData(
-    functionFragment: "contractBalance",
+    functionFragment: "epochLengthInBlocks",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "distributor",
+    functionFragment: "initialize",
+    values: [string, string, BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "ohm", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "ohmToDistributeNextEpoch",
     values?: undefined
   ): string;
-  encodeFunctionData(functionFragment: "epoch", values?: undefined): string;
-  encodeFunctionData(functionFragment: "forfeit", values?: undefined): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "giveLockBonus",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(functionFragment: "index", values?: undefined): string;
-  encodeFunctionData(functionFragment: "locker", values?: undefined): string;
-  encodeFunctionData(functionFragment: "manager", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "pullManagement",
+    functionFragment: "renounceOwnership",
     values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "pushManagement",
-    values: [string]
-  ): string;
-  encodeFunctionData(functionFragment: "rebase", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "renounceManagement",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "returnLockBonus",
-    values: [BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "sOHM", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "setContract",
-    values: [BigNumberish, string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setWarmup",
+    functionFragment: "setEpochLengthintBlock",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "stake",
-    values: [BigNumberish, string]
+    functionFragment: "stakeOHM",
+    values: [BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "toggleDepositLock",
-    values?: undefined
+    functionFragment: "stakeOHMWithPermit",
+    values: [BigNumberish, BigNumberish, BigNumberish, BytesLike, BytesLike]
   ): string;
   encodeFunctionData(
-    functionFragment: "totalBonus",
-    values?: undefined
+    functionFragment: "transferOwnership",
+    values: [string]
   ): string;
   encodeFunctionData(
-    functionFragment: "unstake",
-    values: [BigNumberish, boolean]
+    functionFragment: "unstakeOHM",
+    values: [BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "warmupContract",
-    values?: undefined
-  ): string;
-  encodeFunctionData(functionFragment: "warmupInfo", values: [string]): string;
-  encodeFunctionData(
-    functionFragment: "warmupPeriod",
-    values?: undefined
+    functionFragment: "unstakeOHMWithPermit",
+    values: [BigNumberish, BigNumberish, BigNumberish, BytesLike, BytesLike]
   ): string;
 
-  decodeFunctionResult(functionFragment: "OHM", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "claim", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "contractBalance",
+    functionFragment: "epochLengthInBlocks",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "ohm", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "distributor",
+    functionFragment: "ohmToDistributeNextEpoch",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "epoch", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "forfeit", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "giveLockBonus",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "index", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "locker", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "manager", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "pullManagement",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "pushManagement",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "rebase", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "renounceManagement",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "returnLockBonus",
+    functionFragment: "renounceOwnership",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "sOHM", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "setContract",
+    functionFragment: "setEpochLengthintBlock",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "setWarmup", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "stake", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "stakeOHM", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "toggleDepositLock",
+    functionFragment: "stakeOHMWithPermit",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "totalBonus", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "unstake", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "warmupContract",
+    functionFragment: "transferOwnership",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "warmupInfo", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "unstakeOHM", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "warmupPeriod",
+    functionFragment: "unstakeOHMWithPermit",
     data: BytesLike
   ): Result;
 
   events: {
-    "OwnershipPulled(address,address)": EventFragment;
-    "OwnershipPushed(address,address)": EventFragment;
+    "OwnershipTransferred(address,address)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "OwnershipPulled"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "OwnershipPushed"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
 }
 
-export type OwnershipPulledEvent = TypedEvent<
-  [string, string] & { previousOwner: string; newOwner: string }
->;
-
-export type OwnershipPushedEvent = TypedEvent<
+export type OwnershipTransferredEvent = TypedEvent<
   [string, string] & { previousOwner: string; newOwner: string }
 >;
 
@@ -239,313 +170,186 @@ export class OlympusStaking extends BaseContract {
   interface: OlympusStakingInterface;
 
   functions: {
-    OHM(overrides?: CallOverrides): Promise<[string]>;
+    epochLengthInBlocks(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    claim(
-      _recipient: string,
+    initialize(
+      ohmTokenAddress_: string,
+      sOHM_: string,
+      epochLengthInBlocks_: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    contractBalance(overrides?: CallOverrides): Promise<[BigNumber]>;
+    ohm(overrides?: CallOverrides): Promise<[string]>;
 
-    distributor(overrides?: CallOverrides): Promise<[string]>;
+    ohmToDistributeNextEpoch(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    epoch(
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber, BigNumber, BigNumber] & {
-        length: BigNumber;
-        number: BigNumber;
-        endBlock: BigNumber;
-        distribute: BigNumber;
-      }
-    >;
+    owner(overrides?: CallOverrides): Promise<[string]>;
 
-    forfeit(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    giveLockBonus(
-      _amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    index(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    locker(overrides?: CallOverrides): Promise<[string]>;
-
-    manager(overrides?: CallOverrides): Promise<[string]>;
-
-    pullManagement(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    pushManagement(
-      newOwner_: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    rebase(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    renounceManagement(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    returnLockBonus(
-      _amount: BigNumberish,
+    renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     sOHM(overrides?: CallOverrides): Promise<[string]>;
 
-    setContract(
-      _contract: BigNumberish,
-      _address: string,
+    setEpochLengthintBlock(
+      newEpochLengthInBlocks_: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    setWarmup(
-      _warmupPeriod: BigNumberish,
+    stakeOHM(
+      amountToStake_: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    stake(
-      _amount: BigNumberish,
-      _recipient: string,
+    stakeOHMWithPermit(
+      amountToStake_: BigNumberish,
+      deadline_: BigNumberish,
+      v_: BigNumberish,
+      r_: BytesLike,
+      s_: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    toggleDepositLock(
+    transferOwnership(
+      newOwner_: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    totalBonus(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    unstake(
-      _amount: BigNumberish,
-      _trigger: boolean,
+    unstakeOHM(
+      amountToWithdraw_: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    warmupContract(overrides?: CallOverrides): Promise<[string]>;
-
-    warmupInfo(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber, BigNumber, boolean] & {
-        deposit: BigNumber;
-        gons: BigNumber;
-        expiry: BigNumber;
-        lock: boolean;
-      }
-    >;
-
-    warmupPeriod(overrides?: CallOverrides): Promise<[BigNumber]>;
+    unstakeOHMWithPermit(
+      amountToWithdraw_: BigNumberish,
+      deadline_: BigNumberish,
+      v_: BigNumberish,
+      r_: BytesLike,
+      s_: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
   };
 
-  OHM(overrides?: CallOverrides): Promise<string>;
+  epochLengthInBlocks(overrides?: CallOverrides): Promise<BigNumber>;
 
-  claim(
-    _recipient: string,
+  initialize(
+    ohmTokenAddress_: string,
+    sOHM_: string,
+    epochLengthInBlocks_: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  contractBalance(overrides?: CallOverrides): Promise<BigNumber>;
+  ohm(overrides?: CallOverrides): Promise<string>;
 
-  distributor(overrides?: CallOverrides): Promise<string>;
+  ohmToDistributeNextEpoch(overrides?: CallOverrides): Promise<BigNumber>;
 
-  epoch(
-    overrides?: CallOverrides
-  ): Promise<
-    [BigNumber, BigNumber, BigNumber, BigNumber] & {
-      length: BigNumber;
-      number: BigNumber;
-      endBlock: BigNumber;
-      distribute: BigNumber;
-    }
-  >;
+  owner(overrides?: CallOverrides): Promise<string>;
 
-  forfeit(
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  giveLockBonus(
-    _amount: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  index(overrides?: CallOverrides): Promise<BigNumber>;
-
-  locker(overrides?: CallOverrides): Promise<string>;
-
-  manager(overrides?: CallOverrides): Promise<string>;
-
-  pullManagement(
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  pushManagement(
-    newOwner_: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  rebase(
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  renounceManagement(
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  returnLockBonus(
-    _amount: BigNumberish,
+  renounceOwnership(
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   sOHM(overrides?: CallOverrides): Promise<string>;
 
-  setContract(
-    _contract: BigNumberish,
-    _address: string,
+  setEpochLengthintBlock(
+    newEpochLengthInBlocks_: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  setWarmup(
-    _warmupPeriod: BigNumberish,
+  stakeOHM(
+    amountToStake_: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  stake(
-    _amount: BigNumberish,
-    _recipient: string,
+  stakeOHMWithPermit(
+    amountToStake_: BigNumberish,
+    deadline_: BigNumberish,
+    v_: BigNumberish,
+    r_: BytesLike,
+    s_: BytesLike,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  toggleDepositLock(
+  transferOwnership(
+    newOwner_: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  totalBonus(overrides?: CallOverrides): Promise<BigNumber>;
-
-  unstake(
-    _amount: BigNumberish,
-    _trigger: boolean,
+  unstakeOHM(
+    amountToWithdraw_: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  warmupContract(overrides?: CallOverrides): Promise<string>;
-
-  warmupInfo(
-    arg0: string,
-    overrides?: CallOverrides
-  ): Promise<
-    [BigNumber, BigNumber, BigNumber, boolean] & {
-      deposit: BigNumber;
-      gons: BigNumber;
-      expiry: BigNumber;
-      lock: boolean;
-    }
-  >;
-
-  warmupPeriod(overrides?: CallOverrides): Promise<BigNumber>;
+  unstakeOHMWithPermit(
+    amountToWithdraw_: BigNumberish,
+    deadline_: BigNumberish,
+    v_: BigNumberish,
+    r_: BytesLike,
+    s_: BytesLike,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   callStatic: {
-    OHM(overrides?: CallOverrides): Promise<string>;
+    epochLengthInBlocks(overrides?: CallOverrides): Promise<BigNumber>;
 
-    claim(_recipient: string, overrides?: CallOverrides): Promise<void>;
-
-    contractBalance(overrides?: CallOverrides): Promise<BigNumber>;
-
-    distributor(overrides?: CallOverrides): Promise<string>;
-
-    epoch(
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber, BigNumber, BigNumber] & {
-        length: BigNumber;
-        number: BigNumber;
-        endBlock: BigNumber;
-        distribute: BigNumber;
-      }
-    >;
-
-    forfeit(overrides?: CallOverrides): Promise<void>;
-
-    giveLockBonus(
-      _amount: BigNumberish,
+    initialize(
+      ohmTokenAddress_: string,
+      sOHM_: string,
+      epochLengthInBlocks_: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    index(overrides?: CallOverrides): Promise<BigNumber>;
+    ohm(overrides?: CallOverrides): Promise<string>;
 
-    locker(overrides?: CallOverrides): Promise<string>;
+    ohmToDistributeNextEpoch(overrides?: CallOverrides): Promise<BigNumber>;
 
-    manager(overrides?: CallOverrides): Promise<string>;
+    owner(overrides?: CallOverrides): Promise<string>;
 
-    pullManagement(overrides?: CallOverrides): Promise<void>;
-
-    pushManagement(newOwner_: string, overrides?: CallOverrides): Promise<void>;
-
-    rebase(overrides?: CallOverrides): Promise<void>;
-
-    renounceManagement(overrides?: CallOverrides): Promise<void>;
-
-    returnLockBonus(
-      _amount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
     sOHM(overrides?: CallOverrides): Promise<string>;
 
-    setContract(
-      _contract: BigNumberish,
-      _address: string,
+    setEpochLengthintBlock(
+      newEpochLengthInBlocks_: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    setWarmup(
-      _warmupPeriod: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    stake(
-      _amount: BigNumberish,
-      _recipient: string,
+    stakeOHM(
+      amountToStake_: BigNumberish,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    toggleDepositLock(overrides?: CallOverrides): Promise<void>;
-
-    totalBonus(overrides?: CallOverrides): Promise<BigNumber>;
-
-    unstake(
-      _amount: BigNumberish,
-      _trigger: boolean,
+    stakeOHMWithPermit(
+      amountToStake_: BigNumberish,
+      deadline_: BigNumberish,
+      v_: BigNumberish,
+      r_: BytesLike,
+      s_: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    warmupContract(overrides?: CallOverrides): Promise<string>;
-
-    warmupInfo(
-      arg0: string,
+    transferOwnership(
+      newOwner_: string,
       overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber, BigNumber, boolean] & {
-        deposit: BigNumber;
-        gons: BigNumber;
-        expiry: BigNumber;
-        lock: boolean;
-      }
-    >;
+    ): Promise<void>;
 
-    warmupPeriod(overrides?: CallOverrides): Promise<BigNumber>;
+    unstakeOHM(
+      amountToWithdraw_: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    unstakeOHMWithPermit(
+      amountToWithdraw_: BigNumberish,
+      deadline_: BigNumberish,
+      v_: BigNumberish,
+      r_: BytesLike,
+      s_: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {
-    "OwnershipPulled(address,address)"(
+    "OwnershipTransferred(address,address)"(
       previousOwner?: string | null,
       newOwner?: string | null
     ): TypedEventFilter<
@@ -553,23 +357,7 @@ export class OlympusStaking extends BaseContract {
       { previousOwner: string; newOwner: string }
     >;
 
-    OwnershipPulled(
-      previousOwner?: string | null,
-      newOwner?: string | null
-    ): TypedEventFilter<
-      [string, string],
-      { previousOwner: string; newOwner: string }
-    >;
-
-    "OwnershipPushed(address,address)"(
-      previousOwner?: string | null,
-      newOwner?: string | null
-    ): TypedEventFilter<
-      [string, string],
-      { previousOwner: string; newOwner: string }
-    >;
-
-    OwnershipPushed(
+    OwnershipTransferred(
       previousOwner?: string | null,
       newOwner?: string | null
     ): TypedEventFilter<
@@ -579,183 +367,128 @@ export class OlympusStaking extends BaseContract {
   };
 
   estimateGas: {
-    OHM(overrides?: CallOverrides): Promise<BigNumber>;
+    epochLengthInBlocks(overrides?: CallOverrides): Promise<BigNumber>;
 
-    claim(
-      _recipient: string,
+    initialize(
+      ohmTokenAddress_: string,
+      sOHM_: string,
+      epochLengthInBlocks_: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    contractBalance(overrides?: CallOverrides): Promise<BigNumber>;
+    ohm(overrides?: CallOverrides): Promise<BigNumber>;
 
-    distributor(overrides?: CallOverrides): Promise<BigNumber>;
+    ohmToDistributeNextEpoch(overrides?: CallOverrides): Promise<BigNumber>;
 
-    epoch(overrides?: CallOverrides): Promise<BigNumber>;
+    owner(overrides?: CallOverrides): Promise<BigNumber>;
 
-    forfeit(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    giveLockBonus(
-      _amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    index(overrides?: CallOverrides): Promise<BigNumber>;
-
-    locker(overrides?: CallOverrides): Promise<BigNumber>;
-
-    manager(overrides?: CallOverrides): Promise<BigNumber>;
-
-    pullManagement(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    pushManagement(
-      newOwner_: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    rebase(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    renounceManagement(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    returnLockBonus(
-      _amount: BigNumberish,
+    renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     sOHM(overrides?: CallOverrides): Promise<BigNumber>;
 
-    setContract(
-      _contract: BigNumberish,
-      _address: string,
+    setEpochLengthintBlock(
+      newEpochLengthInBlocks_: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    setWarmup(
-      _warmupPeriod: BigNumberish,
+    stakeOHM(
+      amountToStake_: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    stake(
-      _amount: BigNumberish,
-      _recipient: string,
+    stakeOHMWithPermit(
+      amountToStake_: BigNumberish,
+      deadline_: BigNumberish,
+      v_: BigNumberish,
+      r_: BytesLike,
+      s_: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    toggleDepositLock(
+    transferOwnership(
+      newOwner_: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    totalBonus(overrides?: CallOverrides): Promise<BigNumber>;
-
-    unstake(
-      _amount: BigNumberish,
-      _trigger: boolean,
+    unstakeOHM(
+      amountToWithdraw_: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    warmupContract(overrides?: CallOverrides): Promise<BigNumber>;
-
-    warmupInfo(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
-
-    warmupPeriod(overrides?: CallOverrides): Promise<BigNumber>;
+    unstakeOHMWithPermit(
+      amountToWithdraw_: BigNumberish,
+      deadline_: BigNumberish,
+      v_: BigNumberish,
+      r_: BytesLike,
+      s_: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    OHM(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    epochLengthInBlocks(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    claim(
-      _recipient: string,
+    initialize(
+      ohmTokenAddress_: string,
+      sOHM_: string,
+      epochLengthInBlocks_: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    contractBalance(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    ohm(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    distributor(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    epoch(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    forfeit(
-      overrides?: Overrides & { from?: string | Promise<string> }
+    ohmToDistributeNextEpoch(
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    giveLockBonus(
-      _amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    index(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    locker(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    manager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    pullManagement(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    pushManagement(
-      newOwner_: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    rebase(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    renounceManagement(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    returnLockBonus(
-      _amount: BigNumberish,
+    renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     sOHM(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    setContract(
-      _contract: BigNumberish,
-      _address: string,
+    setEpochLengthintBlock(
+      newEpochLengthInBlocks_: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    setWarmup(
-      _warmupPeriod: BigNumberish,
+    stakeOHM(
+      amountToStake_: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    stake(
-      _amount: BigNumberish,
-      _recipient: string,
+    stakeOHMWithPermit(
+      amountToStake_: BigNumberish,
+      deadline_: BigNumberish,
+      v_: BigNumberish,
+      r_: BytesLike,
+      s_: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    toggleDepositLock(
+    transferOwnership(
+      newOwner_: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    totalBonus(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    unstake(
-      _amount: BigNumberish,
-      _trigger: boolean,
+    unstakeOHM(
+      amountToWithdraw_: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    warmupContract(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    warmupInfo(
-      arg0: string,
-      overrides?: CallOverrides
+    unstakeOHMWithPermit(
+      amountToWithdraw_: BigNumberish,
+      deadline_: BigNumberish,
+      v_: BigNumberish,
+      r_: BytesLike,
+      s_: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
-
-    warmupPeriod(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }
