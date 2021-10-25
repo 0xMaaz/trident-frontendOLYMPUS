@@ -1,7 +1,5 @@
-# [Ω Olympus Frontend](https://app.olympusdao.finance/)
-This is the front-end repo for Olympus that allows users be part of the future of Greece. 
-
-**_ Note We're currently in the process of switching to TypeScript. Please read  this  guide on how to use TypeScript for this repository. https://github.com/OlympusDAO/olympus-frontend/wiki/TypeScript-Refactor-General-Guidelines _**
+# [Ψ Trident Frontend](https://app.trident.finance/)
+This is the front-end repo for Trident that allows users be part of the future of Greece. 
 
 ##  🔧 Setting up Local Development
 
@@ -101,5 +99,5 @@ Only the following people have merge access for the master branch.
 
 ## 🗣 Community
 
-* [Join our Discord](https://discord.gg/gGZUMVDuhQ) and ask how you can get involved with the DAO!
+* [Join our Discord](https://discord.gg/) and ask how you can get involved with the DAO!
 
