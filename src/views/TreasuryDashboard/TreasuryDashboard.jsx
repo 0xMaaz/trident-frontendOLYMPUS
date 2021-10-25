@@ -43,11 +43,11 @@ function TreasuryDashboard() {
     return state.app.currentIndex;
   });
 
-  const backingPerOhm = useSelector(state => {
+  const backingPerPsi = useSelector(state => {
     return state.app.treasuryMarketValue / state.app.circSupply;
   });
 
-  const wsOhmPrice = useSelector(state => {
+  const wsPsiPrice = useSelector(state => {
     return state.app.marketPrice * state.app.currentIndex;
   });
 
@@ -60,7 +60,7 @@ function TreasuryDashboard() {
       setData(metrics);
 
       let staked = r.data.protocolMetrics.map(entry => ({
-        staked: (parseFloat(entry.sOhmCirculatingSupply) / parseFloat(entry.ohmCirculatingSupply)) * 100,
+        staked: (parseFloat(entry.sPsiCirculatingSupply) / parseFloat(entry.psiCirculatingSupply)) * 100,
         timestamp: entry.timestamp,
       }));
       staked = staked.filter(pm => pm.staked < 100);
@@ -124,7 +124,7 @@ function TreasuryDashboard() {
                 </Typography>
 
                 <Typography variant="h5">
-                  {wsOhmPrice ? formatCurrency(wsOhmPrice, 2) : <Skeleton type="text" />}
+                  {wsPsiPrice ? formatCurrency(wsPsiPrice, 2) : <Skeleton type="text" />}
                 </Typography>
               </Box>
 
@@ -146,7 +146,7 @@ function TreasuryDashboard() {
                   Backing per PSI
                 </Typography>
                 <Typography variant="h5">
-                  {backingPerOhm ? formatCurrency(backingPerOhm, 2) : <Skeleton type="text" />}
+                  {backingPerPsi ? formatCurrency(backingPerPsi, 2) : <Skeleton type="text" />}
                 </Typography>
               </Box>
 
@@ -244,10 +244,10 @@ function TreasuryDashboard() {
                 <Chart
                   type="area"
                   data={data}
-                  dataKey={["treasuryOhmDaiPOL"]}
+                  dataKey={["treasuryPsiDaiPOL"]}
                   stopColor={[["rgba(128, 204, 131, 1)", "rgba(128, 204, 131, 0)"]]}
                   headerText="Protocol Owned Liquidity PSI-DAI"
-                  headerSubText={`${data && trim(data[0].treasuryOhmDaiPOL, 2)}% `}
+                  headerSubText={`${data && trim(data[0].treasuryPsiDaiPOL, 2)}% `}
                   dataFormat="percent"
                   bulletpointColors={bulletpoints.pol}
                   itemNames={tooltipItems.pol}

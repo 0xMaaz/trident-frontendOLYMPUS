@@ -28,15 +28,15 @@ export const loadAppDetails = createAsyncThunk(
     }
     protocolMetrics(first: 1, orderBy: timestamp, orderDirection: desc) {
       timestamp
-      ohmCirculatingSupply
-      sOhmCirculatingSupply
+      psiCirculatingSupply
+      sPsiCirculatingSupply
       totalSupply
-      ohmPrice
+      psiPrice
       marketCap
       totalValueLocked
       treasuryMarketValue
       nextEpochRebase
-      nextDistributedOhm
+      nextDistributedPsi
     }
   }
 `;
@@ -50,7 +50,7 @@ export const loadAppDetails = createAsyncThunk(
 
     const stakingTVL = parseFloat(graphData.data.protocolMetrics[0].totalValueLocked);
     // NOTE (appleseed): marketPrice from Graph was delayed, so get CoinGecko price
-    // const marketPrice = parseFloat(graphData.data.protocolMetrics[0].ohmPrice);
+    // const marketPrice = parseFloat(graphData.data.protocolMetrics[0].psiPrice);
     let marketPrice;
     try {
       const originalPromiseResult = await dispatch(
@@ -64,7 +64,7 @@ export const loadAppDetails = createAsyncThunk(
     }
 
     const marketCap = parseFloat(graphData.data.protocolMetrics[0].marketCap);
-    const circSupply = parseFloat(graphData.data.protocolMetrics[0].ohmCirculatingSupply);
+    const circSupply = parseFloat(graphData.data.protocolMetrics[0].psiCirculatingSupply);
     const totalSupply = parseFloat(graphData.data.protocolMetrics[0].totalSupply);
     const treasuryMarketValue = parseFloat(graphData.data.protocolMetrics[0].treasuryMarketValue);
     // const currentBlock = parseFloat(graphData.data._meta.block.number);
@@ -92,13 +92,13 @@ export const loadAppDetails = createAsyncThunk(
       TridentStaking,
       provider,
     );
-    const sohmMainContract = new ethers.Contract(addresses[networkID].SPSI_ADDRESS as string, sPSIv2, provider);
-    const sohmOldContract = new ethers.Contract(addresses[networkID].OLD_SPSI_ADDRESS as string, sPSI, provider);
+    const spsiMainContract = new ethers.Contract(addresses[networkID].SPSI_ADDRESS as string, sPSIv2, provider);
+    const spsiOldContract = new ethers.Contract(addresses[networkID].OLD_SPSI_ADDRESS as string, sPSI, provider);
 
     // Calculating staking
     const epoch = await stakingContract.epoch();
     const stakingReward = epoch.distribute;
-    const circ = await sohmMainContract.circulatingSupply();
+    const circ = await spsiMainContract.circulatingSupply();
     const stakingRebase = stakingReward / circ;
     const fiveDayRate = Math.pow(1 + stakingRebase, 5 * 3) - 1;
     const stakingAPY = Math.pow(1 + stakingRebase, 365 * 3) - 1;
@@ -163,7 +163,7 @@ export const findOrLoadMarketPrice = createAsyncThunk(
 
 /**
  * - fetches the PSI price from CoinGecko (via getTokenPrice)
- * - falls back to fetch marketPrice from ohm-dai contract
+ * - falls back to fetch marketPrice from psi-dai contract
  * - updates the App.slice when it runs
  */
 const loadMarketPrice = createAsyncThunk("app/loadMarketPrice", async ({ networkID, provider }: IBaseAsyncThunk) => {

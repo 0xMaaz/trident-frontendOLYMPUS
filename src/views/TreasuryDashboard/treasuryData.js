@@ -6,16 +6,16 @@ query {
   protocolMetrics(first: 100, orderBy: timestamp, orderDirection: desc) {
     id
     timestamp
-    ohmCirculatingSupply
-    sOhmCirculatingSupply
+    psiCirculatingSupply
+    sPhmCirculatingSupply
     totalSupply
-    ohmPrice
+    psiPrice
     marketCap
     totalValueLocked
     treasuryRiskFreeValue
     treasuryMarketValue
     nextEpochRebase
-    nextDistributedOhm
+    nextDistributedPsi
     treasuryDaiRiskFreeValue
     treasuryFraxMarketValue
     treasuryDaiMarketValue
@@ -28,8 +28,8 @@ query {
     runway50k
     runwayCurrent
     holders
-    treasuryOhmDaiPOL
-    treasuryOhmFraxPOL
+    treasuryPsiDaiPOL
+    treasuryPsiFraxPOL
   }
 }
 `;
@@ -149,7 +149,7 @@ export const tooltipInfoMessages = {
   mvt: "Market Value of Treasury Assets, is the sum of the value (in dollars) of all assets held by the treasury.",
   rfv: "Risk Free Value, is the amount of funds the treasury guarantees to use for backing PSI.",
   pol: "Protocol Owned Liquidity, is the amount of LP the treasury owns and controls. The more POL the better for the protocol and its users.",
-  holder: "Holders, represents the total number of Ohmies (sPSI holders)",
+  holder: "Holders, represents the total number of Psies (sPSI holders)",
   staked: "PSI Staked, is the ratio of sPSI to PSI (staked vs unstaked)",
   apy: "Annual Percentage Yield, is the normalized representation of an interest rate, based on a compounding period over one year. Note that APYs provided are rather ballpark level indicators and not so much precise future results.",
   runway: "Runway, is the number of days sPSI emissions can be sustained at a given rate. Lower APY = longer runway",
