@@ -2,10 +2,10 @@ import { StableBond, LPBond, NetworkID, CustomBond } from "src/lib/Bond";
 import { addresses } from "src/constants";
 
 import { ReactComponent as DaiImg } from "src/assets/tokens/DAI.svg";
-import { ReactComponent as OhmDaiImg } from "src/assets/tokens/OHM-DAI.svg";
+import { ReactComponent as OhmDaiImg } from "src/assets/tokens/PSI-DAI.svg";
 import { ReactComponent as FraxImg } from "src/assets/tokens/FRAX.svg";
-import { ReactComponent as OhmFraxImg } from "src/assets/tokens/OHM-FRAX.svg";
-import { ReactComponent as OhmLusdImg } from "src/assets/tokens/OHM-LUSD.svg";
+import { ReactComponent as OhmFraxImg } from "src/assets/tokens/PSI-FRAX.svg";
+import { ReactComponent as OhmLusdImg } from "src/assets/tokens/PSI-LUSD.svg";
 import { ReactComponent as wETHImg } from "src/assets/tokens/wETH.svg";
 import { ReactComponent as LusdImg } from "src/assets/tokens/LUSD.svg";
 
@@ -105,7 +105,7 @@ export const eth = new CustomBond({
 
 export const ohm_dai = new LPBond({
   name: "ohm_dai_lp",
-  displayName: "OHM-DAI LP",
+  displayName: "PSI-DAI LP",
   bondToken: "DAI",
   bondIconSvg: OhmDaiImg,
   bondContractABI: BondOhmDaiContract,
@@ -126,7 +126,7 @@ export const ohm_dai = new LPBond({
 
 export const ohm_frax = new LPBond({
   name: "ohm_frax_lp",
-  displayName: "OHM-FRAX LP",
+  displayName: "PSI-FRAX LP",
   bondToken: "FRAX",
   bondIconSvg: OhmFraxImg,
   bondContractABI: FraxOhmBondContract,
@@ -147,7 +147,7 @@ export const ohm_frax = new LPBond({
 
 export const ohm_lusd = new LPBond({
   name: "ohm_lusd_lp",
-  displayName: "OHM-LUSD LP",
+  displayName: "PSI-LUSD LP",
   bondToken: "LUSD",
   bondIconSvg: OhmLusdImg,
   bondContractABI: BondOhmLusdContract,

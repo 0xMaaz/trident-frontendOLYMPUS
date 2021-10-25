@@ -29,7 +29,7 @@ Open the source code and start editing!
 ## Rinkeby Testing
 
 **Rinkeby faucet for sPSI:**
-`not yet deployed`, to retrieve test sPSI click `Connect to Web3` and use function #3: `dripSPSI`. After connecting to web3, click `Write` to execute and 10 sOHM will automatically be transferred to your connected wallet.
+`not yet deployed`, to retrieve test sPSI click `Connect to Web3` and use function #3: `dripSPSI`. After connecting to web3, click `Write` to execute and 10 sPSI will automatically be transferred to your connected wallet.
 
 Note: The faucet is limited to one transfer per wallet every 6500 blocks (~1 day)
 

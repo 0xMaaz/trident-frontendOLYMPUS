@@ -5,8 +5,8 @@ import { abi as PairContract } from "../abi/PairContract.json";
 import { abi as RedeemHelperAbi } from "../abi/RedeemHelper.json";
 
 import { SvgIcon } from "@material-ui/core";
-import { ReactComponent as OhmImg } from "../assets/tokens/token_OHM.svg";
-import { ReactComponent as SOhmImg } from "../assets/tokens/token_sOHM.svg";
+import { ReactComponent as OhmImg } from "../assets/tokens/token_PSI.svg";
+import { ReactComponent as SOhmImg } from "../assets/tokens/token_sPSI.svg";
 
 import { ohm_dai } from "./AllBonds";
 import { JsonRpcSigner, StaticJsonRpcProvider } from "@ethersproject/providers";
@@ -23,7 +23,7 @@ export async function getMarketPrice({ networkID, provider }: IBaseAsyncThunk) {
   return marketPrice;
 }
 
-export async function getTokenPrice(tokenId = "olympus") {
+export async function getTokenPrice(tokenId = "trident") {
   const resp = await axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=${tokenId}&vs_currencies=usd`);
   let tokenPrice: number = resp.data[tokenId].usd;
   return tokenPrice;

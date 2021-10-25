@@ -111,11 +111,11 @@ function Stake() {
     // 1st catch if quantity > balance
     let gweiValue = ethers.utils.parseUnits(quantity, "gwei");
     if (action === "stake" && gweiValue.gt(ethers.utils.parseUnits(ohmBalance, "gwei"))) {
-      return dispatch(error("You cannot stake more than your OHM balance."));
+      return dispatch(error("You cannot stake more than your PSI balance."));
     }
 
     if (action === "unstake" && gweiValue.gt(ethers.utils.parseUnits(sohmBalance, "gwei"))) {
-      return dispatch(error("You cannot unstake more than your sOHM balance."));
+      return dispatch(error("You cannot unstake more than your sPSI balance."));
     }
 
     await dispatch(changeStake({ address, action, value: quantity.toString(), provider, networkID: chainID }));
@@ -169,12 +169,12 @@ function Stake() {
                   <Link
                     className="migrate-sohm-button"
                     style={{ textDecoration: "none" }}
-                    href="https://docs.olympusdao.finance/using-the-website/migrate"
+                    href="https://docs.tridentdao.finance/using-the-website/migrate"
                     aria-label="migrate-sohm"
                     target="_blank"
                   >
                     <NewReleases viewBox="0 0 24 24" />
-                    <Typography>Migrate sOHM!</Typography>
+                    <Typography>Migrate sPSI!</Typography>
                   </Link>
                 )}
               </div>
@@ -224,7 +224,7 @@ function Stake() {
                         Current Index
                       </Typography>
                       <Typography variant="h4">
-                        {currentIndex ? <>{trim(currentIndex, 1)} OHM</> : <Skeleton width="150px" />}
+                        {currentIndex ? <>{trim(currentIndex, 1)} PSI</> : <Skeleton width="150px" />}
                       </Typography>
                     </div>
                   </Grid>
@@ -238,7 +238,7 @@ function Stake() {
                   <div className="wallet-menu" id="wallet-menu">
                     {modalButton}
                   </div>
-                  <Typography variant="h6">Connect your wallet to stake OHM</Typography>
+                  <Typography variant="h6">Connect your wallet to stake PSI</Typography>
                 </div>
               ) : (
                 <>
@@ -264,15 +264,15 @@ function Stake() {
                             <Typography variant="body1" className="stake-note" color="textSecondary">
                               {view === 0 ? (
                                 <>
-                                  First time staking <b>OHM</b>?
+                                  First time staking <b>PSI</b>?
                                   <br />
-                                  Please approve Trident Dao to use your <b>OHM</b> for staking.
+                                  Please approve Trident Dao to use your <b>PSI</b> for staking.
                                 </>
                               ) : (
                                 <>
-                                  First time unstaking <b>sOHM</b>?
+                                  First time unstaking <b>sPSI</b>?
                                   <br />
-                                  Please approve Trident Dao to use your <b>sOHM</b> for unstaking.
+                                  Please approve Trident Dao to use your <b>sPSI</b> for unstaking.
                                 </>
                               )}
                             </Typography>
@@ -315,7 +315,7 @@ function Stake() {
                               onChangeStake("stake");
                             }}
                           >
-                            {txnButtonText(pendingTransactions, "staking", "Stake OHM")}
+                            {txnButtonText(pendingTransactions, "staking", "Stake PSI")}
                           </Button>
                         ) : (
                           <Button
@@ -344,7 +344,7 @@ function Stake() {
                               onChangeStake("unstake");
                             }}
                           >
-                            {txnButtonText(pendingTransactions, "unstaking", "Unstake OHM")}
+                            {txnButtonText(pendingTransactions, "unstaking", "Unstake PSI")}
                           </Button>
                         ) : (
                           <Button
@@ -367,21 +367,21 @@ function Stake() {
                     <div className="data-row">
                       <Typography variant="body1">Your Balance</Typography>
                       <Typography variant="body1">
-                        {isAppLoading ? <Skeleton width="80px" /> : <>{trim(ohmBalance, 4)} OHM</>}
+                        {isAppLoading ? <Skeleton width="80px" /> : <>{trim(ohmBalance, 4)} PSI</>}
                       </Typography>
                     </div>
 
                     <div className="data-row">
                       <Typography variant="body1">Your Staked Balance</Typography>
                       <Typography variant="body1">
-                        {isAppLoading ? <Skeleton width="80px" /> : <>{trimmedBalance} sOHM</>}
+                        {isAppLoading ? <Skeleton width="80px" /> : <>{trimmedBalance} sPSI</>}
                       </Typography>
                     </div>
 
                     <div className="data-row">
                       <Typography variant="body1">Next Reward Amount</Typography>
                       <Typography variant="body1">
-                        {isAppLoading ? <Skeleton width="80px" /> : <>{nextRewardValue} sOHM</>}
+                        {isAppLoading ? <Skeleton width="80px" /> : <>{nextRewardValue} sPSI</>}
                       </Typography>
                     </div>
 

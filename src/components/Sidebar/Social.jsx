@@ -11,7 +11,7 @@ export default function Social() {
         <SvgIcon color="primary" component={GitHub} />
       </Link>
 
-      <Link href="https://olympusdao.medium.com/" target="_blank">
+      <Link href="https://tridentdao.medium.com/" target="_blank">
         <SvgIcon color="primary" component={Medium} />
       </Link>
 

@@ -23,7 +23,7 @@ function Dashboard() {
   return (
     <div id="dashboard-view">
       <Grid container spacing={1} className="top-row-data">
-        <Grid item lg={4} md={4} sm={3} xs={5} className="olympus-card">
+        <Grid item lg={4} md={4} sm={3} xs={5} className="trident-card">
           <Zoom in={true}>
             <Paper className="ohm-card">
               <Typography variant="h6">Price</Typography>
@@ -152,7 +152,7 @@ function Dashboard() {
                 frameBorder="0"
                 loading="lazy"
                 src="https://duneanalytics.com/embeds/28756/58813/c7893c75-d8f1-421e-85c3-556a22cd7885"
-                title="OHM Stakers"
+                title="PSI Stakers"
               />
             </div>
           </Grid>

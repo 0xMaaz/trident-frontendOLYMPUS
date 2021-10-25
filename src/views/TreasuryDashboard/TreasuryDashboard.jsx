@@ -105,7 +105,7 @@ function TreasuryDashboard() {
 
               <Box className="metric price">
                 <Typography variant="h6" color="textSecondary">
-                  OHM Price
+                  PSI Price
                 </Typography>
                 <Typography variant="h5">
                   {/* appleseed-fix */}
@@ -115,10 +115,10 @@ function TreasuryDashboard() {
 
               <Box className="metric wsoprice">
                 <Typography variant="h6" color="textSecondary">
-                  wsOHM Price
+                  wsPSI Price
                   <InfoTooltip
                     message={
-                      "wsOHM = sOHM * index\n\nThe price of wsOHM is equal to the price of OHM multiplied by the current index"
+                      "wsPSI = sPSI * index\n\nThe price of wsPSI is equal to the price of PSI multiplied by the current index"
                     }
                   />
                 </Typography>
@@ -143,7 +143,7 @@ function TreasuryDashboard() {
 
               <Box className="metric bpo">
                 <Typography variant="h6" color="textSecondary">
-                  Backing per OHM
+                  Backing per PSI
                 </Typography>
                 <Typography variant="h5">
                   {backingPerOhm ? formatCurrency(backingPerOhm, 2) : <Skeleton type="text" />}
@@ -155,12 +155,12 @@ function TreasuryDashboard() {
                   Current Index
                   <InfoTooltip
                     message={
-                      "The current index tracks the amount of sOHM accumulated since the beginning of staking. Basically, how much sOHM one would have if they staked and held a single OHM from day 1."
+                      "The current index tracks the amount of sPSI accumulated since the beginning of staking. Basically, how much sPSI one would have if they staked and held a single PSI from day 1."
                     }
                   />
                 </Typography>
                 <Typography variant="h5">
-                  {currentIndex ? trim(currentIndex, 2) + " sOHM" : <Skeleton type="text" />}
+                  {currentIndex ? trim(currentIndex, 2) + " sPSI" : <Skeleton type="text" />}
                 </Typography>
               </Box>
             </Box>
@@ -246,7 +246,7 @@ function TreasuryDashboard() {
                   data={data}
                   dataKey={["treasuryOhmDaiPOL"]}
                   stopColor={[["rgba(128, 204, 131, 1)", "rgba(128, 204, 131, 0)"]]}
-                  headerText="Protocol Owned Liquidity OHM-DAI"
+                  headerText="Protocol Owned Liquidity PSI-DAI"
                   headerSubText={`${data && trim(data[0].treasuryOhmDaiPOL, 2)}% `}
                   dataFormat="percent"
                   bulletpointColors={bulletpoints.pol}
@@ -284,7 +284,7 @@ function TreasuryDashboard() {
                   data={staked}
                   dataKey={["staked"]}
                   stopColor={[["#55EBC7", "#47ACEB"]]}
-                  headerText="OHM Staked"
+                  headerText="PSI Staked"
                   dataFormat="percent"
                   headerSubText={`${staked && trim(staked[0].staked, 2)}% `}
                   isStaked={true}

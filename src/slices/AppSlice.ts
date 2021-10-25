@@ -2,8 +2,8 @@ import { ethers } from "ethers";
 import { addresses } from "../constants";
 import { abi as OlympusStaking } from "../abi/OlympusStaking.json";
 import { abi as OlympusStakingv2 } from "../abi/OlympusStakingv2.json";
-import { abi as sOHM } from "../abi/sOHM.json";
-import { abi as sOHMv2 } from "../abi/sOhmv2.json";
+import { abi as sPSI } from "../abi/sPSI.json";
+import { abi as sPSIv2 } from "../abi/sOhmv2.json";
 import { setAll, getTokenPrice, getMarketPrice } from "../helpers";
 import { NodeHelper } from "../helpers/NodeHelper";
 import apollo from "../lib/apolloClient.js";
@@ -92,8 +92,8 @@ export const loadAppDetails = createAsyncThunk(
       OlympusStaking,
       provider,
     );
-    const sohmMainContract = new ethers.Contract(addresses[networkID].SOHM_ADDRESS as string, sOHMv2, provider);
-    const sohmOldContract = new ethers.Contract(addresses[networkID].OLD_SOHM_ADDRESS as string, sOHM, provider);
+    const sohmMainContract = new ethers.Contract(addresses[networkID].SPSI_ADDRESS as string, sPSIv2, provider);
+    const sohmOldContract = new ethers.Contract(addresses[networkID].OLD_SPSI_ADDRESS as string, sPSI, provider);
 
     // Calculating staking
     const epoch = await stakingContract.epoch();
@@ -162,7 +162,7 @@ export const findOrLoadMarketPrice = createAsyncThunk(
 );
 
 /**
- * - fetches the OHM price from CoinGecko (via getTokenPrice)
+ * - fetches the PSI price from CoinGecko (via getTokenPrice)
  * - falls back to fetch marketPrice from ohm-dai contract
  * - updates the App.slice when it runs
  */
@@ -172,7 +172,7 @@ const loadMarketPrice = createAsyncThunk("app/loadMarketPrice", async ({ network
     marketPrice = await getMarketPrice({ networkID, provider });
     marketPrice = marketPrice / Math.pow(10, 9);
   } catch (e) {
-    marketPrice = await getTokenPrice("olympus");
+    marketPrice = await getTokenPrice("trident");
   }
   return { marketPrice };
 });
