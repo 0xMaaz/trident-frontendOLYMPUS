@@ -5,8 +5,8 @@ import { abi as PairContract } from "../abi/PairContract.json";
 import { abi as RedeemHelperAbi } from "../abi/RedeemHelper.json";
 
 import { SvgIcon } from "@material-ui/core";
-import { ReactComponent as OhmImg } from "../assets/tokens/token_PSI.svg";
-import { ReactComponent as SOhmImg } from "../assets/tokens/token_sPSI.svg";
+import { ReactComponent as PsiImg } from "../assets/tokens/token_PSI.svg";
+import { ReactComponent as SPsiImg } from "../assets/tokens/token_sPSI.svg";
 
 import { psi_dai } from "./AllBonds";
 import { JsonRpcSigner, StaticJsonRpcProvider } from "@ethersproject/providers";
@@ -104,17 +104,17 @@ export function prettifySeconds(seconds: number, resolution?: string) {
 }
 
 function getSpsiTokenImage() {
-  return <SvgIcon component={SOhmImg} viewBox="0 0 100 100" style={{ height: "1rem", width: "1rem" }} />;
+  return <SvgIcon component={SPsiImg} viewBox="0 0 100 100" style={{ height: "1rem", width: "1rem" }} />;
 }
 
-export function getOhmTokenImage(w?: number, h?: number) {
+export function getPsiTokenImage(w?: number, h?: number) {
   const height = h == null ? "32px" : `${h}px`;
   const width = w == null ? "32px" : `${w}px`;
-  return <SvgIcon component={OhmImg} viewBox="0 0 32 32" style={{ height, width }} />;
+  return <SvgIcon component={PsiImg} viewBox="0 0 32 32" style={{ height, width }} />;
 }
 
 export function getTokenImage(name: string) {
-  if (name === "psi") return getOhmTokenImage();
+  if (name === "psi") return getPsiTokenImage();
   if (name === "spsi") return getSpsiTokenImage();
 }
 

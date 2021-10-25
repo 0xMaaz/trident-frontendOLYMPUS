@@ -21,7 +21,7 @@ import { changeApproval, poolDeposit } from "../../slices/PoolThunk";
 import { Skeleton } from "@material-ui/lab";
 import { error } from "../../slices/MessagesSlice";
 
-const sohmImg = getTokenImage("sohm");
+const spsiImg = getTokenImage("spsi");
 
 export const PoolDeposit = props => {
   const dispatch = useDispatch();
@@ -32,8 +32,8 @@ export const PoolDeposit = props => {
   const isAppLoading = useSelector(state => state.app.loading);
   const isMobileScreen = useMediaQuery("(max-width: 513px)");
 
-  const sohmBalance = useSelector(state => {
-    return state.account.balances && state.account.balances.sohm;
+  const spsiBalance = useSelector(state => {
+    return state.account.balances && state.account.balances.spsi;
   });
 
   const poolBalance = useSelector(state => {
@@ -41,7 +41,7 @@ export const PoolDeposit = props => {
   });
 
   const poolAllowance = useSelector(state => {
-    return state.account.pooling && state.account.pooling.sohmPool;
+    return state.account.pooling && state.account.pooling.spsiPool;
   });
 
   const pendingTransactions = useSelector(state => {
@@ -71,7 +71,7 @@ export const PoolDeposit = props => {
   }, [poolAllowance]);
 
   const setMax = () => {
-    const value = parseFloat(sohmBalance);
+    const value = parseFloat(spsiBalance);
     setQuantity(value);
     let userBalanceAfterDeposit = poolBalance + value;
 
@@ -127,7 +127,7 @@ export const PoolDeposit = props => {
                 onChange={e => updateDepositQuantity(e)}
                 startAdornment={
                   <InputAdornment position="start">
-                    <div className="logo-holder">{sohmImg}</div>
+                    <div className="logo-holder">{spsiImg}</div>
                   </InputAdornment>
                 }
                 labelWidth={0}
@@ -141,7 +141,7 @@ export const PoolDeposit = props => {
               />
             </FormControl>
 
-            {address && hasAllowance("sohm") ? (
+            {address && hasAllowance("spsi") ? (
               <Button
                 className="pool-deposit-button"
                 variant="contained"
@@ -158,7 +158,7 @@ export const PoolDeposit = props => {
                 variant="contained"
                 color="primary"
                 disabled={isPendingTxn(pendingTransactions, "pool_deposit")}
-                onClick={() => onSeekApproval("sohm")}
+                onClick={() => onSeekApproval("spsi")}
               >
                 {txnButtonText(pendingTransactions, "approve_pool", "Approve")}
               </Button>
@@ -181,7 +181,7 @@ export const PoolDeposit = props => {
                 {isAppLoading ? (
                   <Skeleton width="80px" />
                 ) : (
-                  <>{new Intl.NumberFormat("en-US").format(sohmBalance)} sPSI</>
+                  <>{new Intl.NumberFormat("en-US").format(spsiBalance)} sPSI</>
                 )}
               </Typography>
             </div>

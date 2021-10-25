@@ -62,7 +62,7 @@ export const PoolInfo = props => {
               </div>
               <div className="data-row">
                 <Typography>Your wallet balance</Typography>
-                <Typography>{props.isAccountLoading ? <Skeleton width={100} /> : props.sohmBalance} sPSI</Typography>
+                <Typography>{props.isAccountLoading ? <Skeleton width={100} /> : props.spsiBalance} sPSI</Typography>
               </div>
             </Box>
             <Divider color="secondary" />
@@ -140,7 +140,7 @@ PoolInfo.propTypes = {
   graphLoading: PropTypes.bool.isRequired,
   isAccountLoading: PropTypes.bool.isRequired,
   poolBalance: PropTypes.string,
-  sohmBalance: PropTypes.string,
+  spsiBalance: PropTypes.string,
   yourTotalAwards: PropTypes.string,
   yourOdds: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   winners: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

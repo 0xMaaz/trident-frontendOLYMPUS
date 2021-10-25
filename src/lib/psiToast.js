@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function OhmSnackbar({ message, duration, severity }) {
+function PsiSnackbar({ message, duration, severity }) {
   const classes = useStyles();
   const [open, setOpen] = useState(true);
 
@@ -41,17 +41,17 @@ function OhmSnackbar({ message, duration, severity }) {
   );
 }
 
-export const ohmToast = {
+export const psiToast = {
   success: message => {
-    OhmSnackbar(message, null, "success");
+    PsiSnackbar(message, null, "success");
   },
   error: message => {
-    OhmSnackbar(message, null, "error");
+    PsiSnackbar(message, null, "error");
   },
   info: message => {
-    OhmSnackbar(message, null, "info");
+    PsiSnackbar(message, null, "info");
   },
   warn: message => {
-    OhmSnackbar(message, null, "warning");
+    PsiSnackbar(message, null, "warning");
   },
 };
