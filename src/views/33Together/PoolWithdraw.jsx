@@ -24,7 +24,7 @@ import { calculateOdds } from "../../helpers/33Together";
 import { ReactComponent as ArrowUp } from "src/assets/icons/arrow-up.svg";
 import { error } from "../../slices/MessagesSlice";
 
-const sohmImg = getTokenImage("sohm");
+const spsiImg = getTokenImage("spsi");
 
 export const PoolWithdraw = props => {
   const dispatch = useDispatch();
@@ -115,7 +115,7 @@ export const PoolWithdraw = props => {
       ) : (
         <Box className="withdrawal-container">
           <Box display="flex" alignItems="center" flexDirection={`${isMobileScreen ? "column" : "row"}`}>
-            <FormControl className="ohm-input" variant="outlined" color="primary">
+            <FormControl className="psi-input" variant="outlined" color="primary">
               <InputLabel htmlFor="amount-input"></InputLabel>
               <OutlinedInput
                 id="amount-input"
@@ -126,7 +126,7 @@ export const PoolWithdraw = props => {
                 onChange={e => setQuantity(parseFloat(e.target.value))}
                 startAdornment={
                   <InputAdornment position="start">
-                    <div className="logo-holder">{sohmImg}</div>
+                    <div className="logo-holder">{spsiImg}</div>
                   </InputAdornment>
                 }
                 labelWidth={0}

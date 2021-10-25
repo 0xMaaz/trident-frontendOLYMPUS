@@ -5,16 +5,16 @@ import { useSelector } from "react-redux";
 import { Link, SvgIcon, Popper, Button, Paper, Typography, Divider, Box, Fade, Slide } from "@material-ui/core";
 import { ReactComponent as InfoIcon } from "../../assets/icons/info-fill.svg";
 import { ReactComponent as ArrowUpIcon } from "../../assets/icons/arrow-up.svg";
-import { ReactComponent as sOhmTokenImg } from "../../assets/tokens/token_sPSI.svg";
-import { ReactComponent as ohmTokenImg } from "../../assets/tokens/token_PSI.svg";
+import { ReactComponent as sPsiTokenImg } from "../../assets/tokens/token_sPSI.svg";
+import { ReactComponent as psiTokenImg } from "../../assets/tokens/token_PSI.svg";
 import { ReactComponent as t33TokenImg } from "../../assets/tokens/token_33T.svg";
 
-import "./ohmmenu.scss";
+import "./psimenu.scss";
 import { dai, frax } from "src/helpers/AllBonds";
 import { useWeb3Context } from "../../hooks/web3Context";
 
-import OhmImg from "src/assets/tokens/token_PSI.svg";
-import SOhmImg from "src/assets/tokens/token_sPSI.svg";
+import PSIImg from "src/assets/tokens/token_PSI.svg";
+import SPSIImg from "src/assets/tokens/token_sPSI.svg";
 import token33tImg from "src/assets/tokens/token_33T.svg";
 
 const addTokenToWallet = (tokenSymbol, tokenAddress) => async () => {
@@ -24,16 +24,16 @@ const addTokenToWallet = (tokenSymbol, tokenAddress) => async () => {
     let tokenPath;
     // if (tokenSymbol === "PSI") {
 
-    // } ? OhmImg : SOhmImg;
+    // } ? PSIImg : SPSIImg;
     switch (tokenSymbol) {
       case "PSI":
-        tokenPath = OhmImg;
+        tokenPath = PSIImg;
         break;
       case "33T":
         tokenPath = token33tImg;
         break;
       default:
-        tokenPath = SOhmImg;
+        tokenPath = SPSIImg;
     }
     const imageURL = `${host}/${tokenPath}`;
 
@@ -56,7 +56,7 @@ const addTokenToWallet = (tokenSymbol, tokenAddress) => async () => {
   }
 };
 
-function OhmMenu() {
+function PsiMenu() {
   const [anchorEl, setAnchorEl] = useState(null);
   const isEthereumAPIAvailable = window.ethereum;
   const { chainID } = useWeb3Context();
@@ -72,7 +72,7 @@ function OhmMenu() {
   };
 
   const open = Boolean(anchorEl);
-  const id = "ohm-popper";
+  const id = "psi-popper";
   const daiAddress = dai.getAddressForReserve(networkID);
   const fraxAddress = frax.getAddressForReserve(networkID);
   return (
@@ -80,9 +80,9 @@ function OhmMenu() {
       component="div"
       onMouseEnter={e => handleClick(e)}
       onMouseLeave={e => handleClick(e)}
-      id="ohm-menu-button-hover"
+      id="psi-menu-button-hover"
     >
-      <Button id="ohm-menu-button" size="large" variant="contained" color="secondary" title="PSI" aria-describedby={id}>
+      <Button id="psi-menu-button" size="large" variant="contained" color="secondary" title="PSI" aria-describedby={id}>
         <SvgIcon component={InfoIcon} color="primary" />
         <Typography>PSI</Typography>
       </Button>
@@ -91,7 +91,7 @@ function OhmMenu() {
         {({ TransitionProps }) => {
           return (
             <Fade {...TransitionProps} timeout={100}>
-              <Paper className="ohm-menu" elevation={1}>
+              <Paper className="psi-menu" elevation={1}>
                 <Box component="div" className="buy-tokens">
                   <Link
                     href={`https://app.sushi.com/swap?inputCurrency=${daiAddress}&outputCurrency=${PSI_ADDRESS}`}
@@ -144,7 +144,7 @@ function OhmMenu() {
                     <Box display="flex" flexDirection="row" justifyContent="space-between">
                       <Button variant="contained" color="secondary" onClick={addTokenToWallet("PSI", PSI_ADDRESS)}>
                         <SvgIcon
-                          component={ohmTokenImg}
+                          component={psiTokenImg}
                           viewBox="0 0 32 32"
                           style={{ height: "25px", width: "25px" }}
                         />
@@ -152,7 +152,7 @@ function OhmMenu() {
                       </Button>
                       <Button variant="contained" color="secondary" onClick={addTokenToWallet("sPSI", SPSI_ADDRESS)}>
                         <SvgIcon
-                          component={sOhmTokenImg}
+                          component={sPsiTokenImg}
                           viewBox="0 0 100 100"
                           style={{ height: "25px", width: "25px" }}
                         />
@@ -189,4 +189,4 @@ function OhmMenu() {
   );
 }
 
-export default OhmMenu;
+export default PsiMenu;

@@ -65,12 +65,12 @@ export const changeApproval = createAsyncThunk(
     }
 
     const signer = provider.getSigner();
-    const sohmContract = new ethers.Contract(addresses[networkID].SPSI_ADDRESS, ierc20Abi, signer);
+    const spsiContract = new ethers.Contract(addresses[networkID].SPSI_ADDRESS, ierc20Abi, signer);
 
     let approveTx;
     try {
-      if (token === "sohm") {
-        approveTx = await sohmContract.approve(
+      if (token === "spsi") {
+        approveTx = await spsiContract.approve(
           addresses[networkID].PT_PRIZE_POOL_ADDRESS,
           ethers.utils.parseUnits("1000000000", "gwei").toString(),
         );
@@ -80,7 +80,7 @@ export const changeApproval = createAsyncThunk(
         dispatch(fetchPendingTxns({ txnHash: approveTx.hash, text, type: pendingTxnType }));
         await approveTx.wait();
       } else {
-        console.log("token not sohm", token);
+        console.log("token not spsi", token);
       }
     } catch (e: unknown) {
       dispatch(error((e as IJsonRPCError).message));
@@ -91,12 +91,12 @@ export const changeApproval = createAsyncThunk(
       }
     }
 
-    const depositAllowance = await sohmContract.allowance(address, addresses[networkID].PT_PRIZE_POOL_ADDRESS);
+    const depositAllowance = await spsiContract.allowance(address, addresses[networkID].PT_PRIZE_POOL_ADDRESS);
 
     return dispatch(
       fetchAccountSuccess({
         pooling: {
-          sohmPool: +depositAllowance,
+          spsiPool: +depositAllowance,
         },
       }),
     );

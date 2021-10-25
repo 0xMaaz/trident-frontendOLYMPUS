@@ -16,18 +16,18 @@ import { IBaseAddressAsyncThunk, ICalcUserBondDetailsAsyncThunk } from "./interf
 export const getBalances = createAsyncThunk(
   "account/getBalances",
   async ({ address, networkID, provider }: IBaseAddressAsyncThunk) => {
-    const ohmContract = new ethers.Contract(addresses[networkID].PSI_ADDRESS as string, ierc20Abi, provider);
-    const ohmBalance = await ohmContract.balanceOf(address);
-    const sohmContract = new ethers.Contract(addresses[networkID].SPSI_ADDRESS as string, ierc20Abi, provider);
-    const sohmBalance = await sohmContract.balanceOf(address);
+    const psiContract = new ethers.Contract(addresses[networkID].PSI_ADDRESS as string, ierc20Abi, provider);
+    const psiBalance = await psiContract.balanceOf(address);
+    const spsiContract = new ethers.Contract(addresses[networkID].SPSI_ADDRESS as string, ierc20Abi, provider);
+    const spsiBalance = await spsiContract.balanceOf(address);
     let poolBalance = 0;
     const poolTokenContract = new ethers.Contract(addresses[networkID].PT_TOKEN_ADDRESS as string, ierc20Abi, provider);
     poolBalance = await poolTokenContract.balanceOf(address);
 
     return {
       balances: {
-        ohm: ethers.utils.formatUnits(ohmBalance, "gwei"),
-        sohm: ethers.utils.formatUnits(sohmBalance, "gwei"),
+        psi: ethers.utils.formatUnits(psiBalance, "gwei"),
+        spsi: ethers.utils.formatUnits(spsiBalance, "gwei"),
         pool: ethers.utils.formatUnits(poolBalance, "gwei"),
       },
     };
@@ -37,12 +37,12 @@ export const getBalances = createAsyncThunk(
 interface IUserAccountDetails {
   balances: {
     dai: string;
-    ohm: string;
-    sohm: string;
+    psi: string;
+    spsi: string;
   };
   staking: {
-    ohmStake: number;
-    ohmUnstake: number;
+    psiStake: number;
+    psiUnstake: number;
   };
   bonding: {
     daiAllowance: number;
@@ -52,10 +52,10 @@ interface IUserAccountDetails {
 export const loadAccountDetails = createAsyncThunk(
   "account/loadAccountDetails",
   async ({ networkID, provider, address }: IBaseAddressAsyncThunk) => {
-    let ohmBalance = 0;
-    let sohmBalance = 0;
-    let fsohmBalance = 0;
-    let wsohmBalance = 0;
+    let psiBalance = 0;
+    let spsiBalance = 0;
+    let fspsiBalance = 0;
+    let wspsiBalance = 0;
     let stakeAllowance = 0;
     let unstakeAllowance = 0;
     let lpStaked = 0;
@@ -70,16 +70,16 @@ export const loadAccountDetails = createAsyncThunk(
     const daiBalance = await daiContract.balanceOf(address);
 
     if (addresses[networkID].PSI_ADDRESS) {
-      const ohmContract = new ethers.Contract(addresses[networkID].PSI_ADDRESS as string, ierc20Abi, provider);
-      ohmBalance = await ohmContract.balanceOf(address);
-      stakeAllowance = await ohmContract.allowance(address, addresses[networkID].STAKING_HELPER_ADDRESS);
+      const psiContract = new ethers.Contract(addresses[networkID].PSI_ADDRESS as string, ierc20Abi, provider);
+      psiBalance = await psiContract.balanceOf(address);
+      stakeAllowance = await psiContract.allowance(address, addresses[networkID].STAKING_HELPER_ADDRESS);
     }
 
     if (addresses[networkID].SPSI_ADDRESS) {
-      const sohmContract = new ethers.Contract(addresses[networkID].SPSI_ADDRESS as string, sPSIv2, provider);
-      sohmBalance = await sohmContract.balanceOf(address);
-      unstakeAllowance = await sohmContract.allowance(address, addresses[networkID].STAKING_ADDRESS);
-      poolAllowance = await sohmContract.allowance(address, addresses[networkID].PT_PRIZE_POOL_ADDRESS);
+      const spsiContract = new ethers.Contract(addresses[networkID].SPSI_ADDRESS as string, sPSIv2, provider);
+      spsiBalance = await spsiContract.balanceOf(address);
+      unstakeAllowance = await spsiContract.allowance(address, addresses[networkID].STAKING_ADDRESS);
+      poolAllowance = await spsiContract.allowance(address, addresses[networkID].PT_PRIZE_POOL_ADDRESS);
     }
 
     if (addresses[networkID].PT_TOKEN_ADDRESS) {
@@ -89,42 +89,42 @@ export const loadAccountDetails = createAsyncThunk(
 
     for (const fuseAddressKey of ["FUSE_6_SPSI", "FUSE_18_SPSI"]) {
       if (addresses[networkID][fuseAddressKey]) {
-        const fsohmContract = await new ethers.Contract(
+        const fspsiContract = await new ethers.Contract(
           addresses[networkID][fuseAddressKey] as string,
           fuseProxy,
           provider,
         );
-        fsohmContract.signer;
-        const exchangeRate = ethers.utils.formatEther(await fsohmContract.exchangeRateStored());
-        const balance = ethers.utils.formatUnits(await fsohmContract.balanceOf(address), "gwei");
-        fsohmBalance += Number(balance) * Number(exchangeRate);
+        fspsiContract.signer;
+        const exchangeRate = ethers.utils.formatEther(await fspsiContract.exchangeRateStored());
+        const balance = ethers.utils.formatUnits(await fspsiContract.balanceOf(address), "gwei");
+        fspsiBalance += Number(balance) * Number(exchangeRate);
       }
     }
 
     if (addresses[networkID].WSPSI_ADDRESS) {
-      const wsohmContract = new ethers.Contract(addresses[networkID].WSPSI_ADDRESS as string, wsPSI, provider);
-      const balance = await wsohmContract.balanceOf(address);
-      wsohmBalance = await wsohmContract.wPSITosPSI(balance);
+      const wspsiContract = new ethers.Contract(addresses[networkID].WSPSI_ADDRESS as string, wsPSI, provider);
+      const balance = await wspsiContract.balanceOf(address);
+      wspsiBalance = await wspsiContract.wPSITosPSI(balance);
     }
 
     return {
       balances: {
         dai: ethers.utils.formatEther(daiBalance),
-        ohm: ethers.utils.formatUnits(ohmBalance, "gwei"),
-        sohm: ethers.utils.formatUnits(sohmBalance, "gwei"),
-        fsohm: fsohmBalance,
-        wsohm: ethers.utils.formatUnits(wsohmBalance, "gwei"),
+        psi: ethers.utils.formatUnits(psiBalance, "gwei"),
+        spsi: ethers.utils.formatUnits(spsiBalance, "gwei"),
+        fspsi: fspsiBalance,
+        wspsi: ethers.utils.formatUnits(wspsiBalance, "gwei"),
         pool: ethers.utils.formatUnits(poolBalance, "gwei"),
       },
       staking: {
-        ohmStake: +stakeAllowance,
-        ohmUnstake: +unstakeAllowance,
+        psiStake: +stakeAllowance,
+        psiUnstake: +unstakeAllowance,
       },
       bonding: {
         daiAllowance: daiBondAllowance,
       },
       pooling: {
-        sohmPool: +poolAllowance,
+        spsiPool: +poolAllowance,
       },
     };
   },
@@ -189,17 +189,17 @@ export const calculateUserBondDetails = createAsyncThunk(
 interface IAccountSlice {
   bonds: { [key: string]: IUserBondDetails };
   balances: {
-    ohm: string;
-    sohm: string;
+    psi: string;
+    spsi: string;
     dai: string;
-    oldsohm: string;
+    oldspsi: string;
   };
   loading: boolean;
 }
 const initialState: IAccountSlice = {
   loading: false,
   bonds: {},
-  balances: { ohm: "", sohm: "", dai: "", oldsohm: "" },
+  balances: { psi: "", spsi: "", dai: "", oldspsi: "" },
 };
 
 const accountSlice = createSlice({

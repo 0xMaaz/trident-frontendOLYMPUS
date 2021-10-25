@@ -18,7 +18,7 @@ import {
 import NewReleases from "@material-ui/icons/NewReleases";
 import RebaseTimer from "../../components/RebaseTimer/RebaseTimer";
 import TabPanel from "../../components/TabPanel";
-import { getOhmTokenImage, getTokenImage, trim } from "../../helpers";
+import { getPsiTokenImage, getTokenImage, trim } from "../../helpers";
 import { changeApproval, changeStake } from "../../slices/StakeThunk";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import "./stake.scss";
@@ -36,8 +36,8 @@ function a11yProps(index) {
   };
 }
 
-const sOhmImg = getTokenImage("sohm");
-const ohmImg = getOhmTokenImage(16, 16);
+const sPsiImg = getTokenImage("spsi");
+const psiImg = getPsiTokenImage(16, 16);
 
 function Stake() {
   const dispatch = useDispatch();
@@ -54,26 +54,26 @@ function Stake() {
   const fiveDayRate = useSelector(state => {
     return state.app.fiveDayRate;
   });
-  const ohmBalance = useSelector(state => {
-    return state.account.balances && state.account.balances.ohm;
+  const psiBalance = useSelector(state => {
+    return state.account.balances && state.account.balances.psi;
   });
-  const oldSohmBalance = useSelector(state => {
-    return state.account.balances && state.account.balances.oldsohm;
+  const oldSpsiBalance = useSelector(state => {
+    return state.account.balances && state.account.balances.oldspsi;
   });
-  const sohmBalance = useSelector(state => {
-    return state.account.balances && state.account.balances.sohm;
+  const spsiBalance = useSelector(state => {
+    return state.account.balances && state.account.balances.spsi;
   });
-  const fsohmBalance = useSelector(state => {
-    return state.account.balances && state.account.balances.fsohm;
+  const fspsiBalance = useSelector(state => {
+    return state.account.balances && state.account.balances.fspsi;
   });
-  const wsohmBalance = useSelector(state => {
-    return state.account.balances && state.account.balances.wsohm;
+  const wspsiBalance = useSelector(state => {
+    return state.account.balances && state.account.balances.wspsi;
   });
   const stakeAllowance = useSelector(state => {
-    return state.account.staking && state.account.staking.ohmStake;
+    return state.account.staking && state.account.staking.psiStake;
   });
   const unstakeAllowance = useSelector(state => {
-    return state.account.staking && state.account.staking.ohmUnstake;
+    return state.account.staking && state.account.staking.psiUnstake;
   });
   const stakingRebase = useSelector(state => {
     return state.app.stakingRebase;
@@ -91,9 +91,9 @@ function Stake() {
 
   const setMax = () => {
     if (view === 0) {
-      setQuantity(ohmBalance);
+      setQuantity(psiBalance);
     } else {
-      setQuantity(sohmBalance);
+      setQuantity(spsiBalance);
     }
   };
 
@@ -110,11 +110,11 @@ function Stake() {
 
     // 1st catch if quantity > balance
     let gweiValue = ethers.utils.parseUnits(quantity, "gwei");
-    if (action === "stake" && gweiValue.gt(ethers.utils.parseUnits(ohmBalance, "gwei"))) {
+    if (action === "stake" && gweiValue.gt(ethers.utils.parseUnits(psiBalance, "gwei"))) {
       return dispatch(error("You cannot stake more than your PSI balance."));
     }
 
-    if (action === "unstake" && gweiValue.gt(ethers.utils.parseUnits(sohmBalance, "gwei"))) {
+    if (action === "unstake" && gweiValue.gt(ethers.utils.parseUnits(spsiBalance, "gwei"))) {
       return dispatch(error("You cannot unstake more than your sPSI balance."));
     }
 
@@ -123,8 +123,8 @@ function Stake() {
 
   const hasAllowance = useCallback(
     token => {
-      if (token === "ohm") return stakeAllowance > 0;
-      if (token === "sohm") return unstakeAllowance > 0;
+      if (token === "psi") return stakeAllowance > 0;
+      if (token === "spsi") return unstakeAllowance > 0;
       return 0;
     },
     [stakeAllowance, unstakeAllowance],
@@ -145,7 +145,7 @@ function Stake() {
   };
 
   const trimmedBalance = Number(
-    [sohmBalance, fsohmBalance, wsohmBalance]
+    [spsiBalance, fspsiBalance, wspsiBalance]
       .filter(Boolean)
       .map(balance => Number(balance))
       .reduce((a, b) => a + b, 0)
@@ -158,19 +158,19 @@ function Stake() {
   return (
     <div id="stake-view">
       <Zoom in={true} onEntered={() => setZoomed(true)}>
-        <Paper className={`ohm-card`}>
+        <Paper className={`psi-card`}>
           <Grid container direction="column" spacing={2}>
             <Grid item>
               <div className="card-header">
                 <Typography variant="h5">Single Stake (3, 3)</Typography>
                 <RebaseTimer />
 
-                {address && oldSohmBalance > 0.01 && (
+                {address && oldSpsiBalance > 0.01 && (
                   <Link
-                    className="migrate-sohm-button"
+                    className="migrate-spsi-button"
                     style={{ textDecoration: "none" }}
                     href="https://docs.tridentdao.finance/using-the-website/migrate"
-                    aria-label="migrate-sohm"
+                    aria-label="migrate-spsi"
                     target="_blank"
                   >
                     <NewReleases viewBox="0 0 24 24" />
@@ -259,7 +259,7 @@ function Stake() {
 
                     <Box className="stake-action-row " display="flex" alignItems="center">
                       {address && !isAllowanceDataLoading ? (
-                        (!hasAllowance("ohm") && view === 0) || (!hasAllowance("sohm") && view === 1) ? (
+                        (!hasAllowance("psi") && view === 0) || (!hasAllowance("spsi") && view === 1) ? (
                           <Box className="help-text">
                             <Typography variant="body1" className="stake-note" color="textSecondary">
                               {view === 0 ? (
@@ -278,7 +278,7 @@ function Stake() {
                             </Typography>
                           </Box>
                         ) : (
-                          <FormControl className="ohm-input" variant="outlined" color="primary">
+                          <FormControl className="psi-input" variant="outlined" color="primary">
                             <InputLabel htmlFor="amount-input"></InputLabel>
                             <OutlinedInput
                               id="amount-input"
@@ -305,7 +305,7 @@ function Stake() {
                       <TabPanel value={view} index={0} className="stake-tab-panel">
                         {isAllowanceDataLoading ? (
                           <Skeleton />
-                        ) : address && hasAllowance("ohm") ? (
+                        ) : address && hasAllowance("psi") ? (
                           <Button
                             className="stake-button"
                             variant="contained"
@@ -324,7 +324,7 @@ function Stake() {
                             color="primary"
                             disabled={isPendingTxn(pendingTransactions, "approve_staking")}
                             onClick={() => {
-                              onSeekApproval("ohm");
+                              onSeekApproval("psi");
                             }}
                           >
                             {txnButtonText(pendingTransactions, "approve_staking", "Approve")}
@@ -334,7 +334,7 @@ function Stake() {
                       <TabPanel value={view} index={1} className="stake-tab-panel">
                         {isAllowanceDataLoading ? (
                           <Skeleton />
-                        ) : address && hasAllowance("sohm") ? (
+                        ) : address && hasAllowance("spsi") ? (
                           <Button
                             className="stake-button"
                             variant="contained"
@@ -353,7 +353,7 @@ function Stake() {
                             color="primary"
                             disabled={isPendingTxn(pendingTransactions, "approve_unstaking")}
                             onClick={() => {
-                              onSeekApproval("sohm");
+                              onSeekApproval("spsi");
                             }}
                           >
                             {txnButtonText(pendingTransactions, "approve_unstaking", "Approve")}
@@ -367,7 +367,7 @@ function Stake() {
                     <div className="data-row">
                       <Typography variant="body1">Your Balance</Typography>
                       <Typography variant="body1">
-                        {isAppLoading ? <Skeleton width="80px" /> : <>{trim(ohmBalance, 4)} PSI</>}
+                        {isAppLoading ? <Skeleton width="80px" /> : <>{trim(psiBalance, 4)} PSI</>}
                       </Typography>
                     </div>
 

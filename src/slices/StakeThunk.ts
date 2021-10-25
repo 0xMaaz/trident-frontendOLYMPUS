@@ -27,23 +27,23 @@ export const changeApproval = createAsyncThunk(
     }
 
     const signer = provider.getSigner();
-    const ohmContract = new ethers.Contract(addresses[networkID].PSI_ADDRESS as string, ierc20Abi, signer);
-    const sohmContract = new ethers.Contract(addresses[networkID].SPSI_ADDRESS as string, ierc20Abi, signer);
+    const psiContract = new ethers.Contract(addresses[networkID].PSI_ADDRESS as string, ierc20Abi, signer);
+    const spsiContract = new ethers.Contract(addresses[networkID].SPSI_ADDRESS as string, ierc20Abi, signer);
     let approveTx;
     try {
-      if (token === "ohm") {
-        approveTx = await ohmContract.approve(
+      if (token === "psi") {
+        approveTx = await psiContract.approve(
           addresses[networkID].STAKING_HELPER_ADDRESS,
           ethers.utils.parseUnits("1000000000", "gwei").toString(),
         );
-      } else if (token === "sohm") {
-        approveTx = await sohmContract.approve(
+      } else if (token === "spsi") {
+        approveTx = await spsiContract.approve(
           addresses[networkID].STAKING_ADDRESS,
           ethers.utils.parseUnits("1000000000", "gwei").toString(),
         );
       }
-      const text = "Approve " + (token === "ohm" ? "Staking" : "Unstaking");
-      const pendingTxnType = token === "ohm" ? "approve_staking" : "approve_unstaking";
+      const text = "Approve " + (token === "psi" ? "Staking" : "Unstaking");
+      const pendingTxnType = token === "psi" ? "approve_staking" : "approve_unstaking";
       dispatch(fetchPendingTxns({ txnHash: approveTx.hash, text, type: pendingTxnType }));
 
       await approveTx.wait();
@@ -56,13 +56,13 @@ export const changeApproval = createAsyncThunk(
       }
     }
 
-    const stakeAllowance = await ohmContract.allowance(address, addresses[networkID].STAKING_HELPER_ADDRESS);
-    const unstakeAllowance = await sohmContract.allowance(address, addresses[networkID].STAKING_ADDRESS);
+    const stakeAllowance = await psiContract.allowance(address, addresses[networkID].STAKING_HELPER_ADDRESS);
+    const unstakeAllowance = await spsiContract.allowance(address, addresses[networkID].STAKING_ADDRESS);
     return dispatch(
       fetchAccountSuccess({
         staking: {
-          ohmStake: +stakeAllowance,
-          ohmUnstake: +unstakeAllowance,
+          psiStake: +stakeAllowance,
+          psiUnstake: +unstakeAllowance,
         },
       }),
     );

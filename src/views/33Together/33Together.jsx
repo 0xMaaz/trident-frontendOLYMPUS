@@ -55,8 +55,8 @@ const PoolTogether = () => {
   ]);
   const isAccountLoading = useSelector(state => state.account.loading ?? true);
 
-  const sohmBalance = useSelector(state => {
-    return state.account.balances && state.account.balances.sohm;
+  const spsiBalance = useSelector(state => {
+    return state.account.balances && state.account.balances.psi;
   });
 
   const poolBalance = useSelector(state => {
@@ -143,7 +143,7 @@ const PoolTogether = () => {
     <div id="pool-together-view">
       <PoolPrize />
 
-      <Paper className="ohm-card">
+      <Paper className="psi-card">
         <Box display="flex">
           <CardHeader title="3, 3 Together" />
           <InfoTooltipMulti messagesArray={infoTooltipMessage} />
@@ -181,7 +181,7 @@ const PoolTogether = () => {
         graphLoading={graphLoading}
         isAccountLoading={isAccountLoading}
         poolBalance={trim(poolBalance, 4)}
-        sohmBalance={trim(sohmBalance, 4)}
+        psiBalance={trim(spsiBalance, 4)}
         yourTotalAwards={trim(yourTotalAwards, 4)}
         yourOdds={trim(yourOdds, 0)}
         winners={winners}

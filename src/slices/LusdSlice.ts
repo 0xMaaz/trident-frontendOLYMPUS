@@ -21,7 +21,7 @@ export const getLusdData = createAsyncThunk(
         apy: avgApy,
         tvl: crucibleDetes.tvlUsd,
         // NOTE (appleseed): balance is in accountSlice for the bond
-        // balance: ethers.utils.formatUnits(sushiOhmLusdBalance, "gwei"),
+        // balance: ethers.utils.formatUnits(sushiPsiLusdBalance, "gwei"),
       };
     }
   },
