@@ -2,7 +2,7 @@ import { setAll } from "../helpers";
 import { createSlice, createSelector, createAsyncThunk } from "@reduxjs/toolkit";
 import { IBaseAddressAsyncThunk } from "./interfaces";
 
-import { calcAludelDetes } from "../helpers/OhmLusdCrucible";
+import { calcAludelDetes } from "../helpers/PsiLusdCrucible";
 
 export const getLusdData = createAsyncThunk(
   "stake/getLusdData",

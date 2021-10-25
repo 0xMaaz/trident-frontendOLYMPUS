@@ -8,14 +8,14 @@ import { SvgIcon } from "@material-ui/core";
 import { ReactComponent as OhmImg } from "../assets/tokens/token_PSI.svg";
 import { ReactComponent as SOhmImg } from "../assets/tokens/token_sPSI.svg";
 
-import { ohm_dai } from "./AllBonds";
+import { psi_dai } from "./AllBonds";
 import { JsonRpcSigner, StaticJsonRpcProvider } from "@ethersproject/providers";
 import { IBaseAsyncThunk } from "src/slices/interfaces";
 
 // NOTE (appleseed): this looks like an outdated method... we now have this data in the graph (used elsewhere in the app)
 export async function getMarketPrice({ networkID, provider }: IBaseAsyncThunk) {
-  const ohm_dai_address = ohm_dai.getAddressForReserve(networkID);
-  const pairContract = new ethers.Contract(ohm_dai_address, PairContract, provider);
+  const psi_dai_address = psi_dai.getAddressForReserve(networkID);
+  const pairContract = new ethers.Contract(psi_dai_address, PairContract, provider);
   const reserves = await pairContract.getReserves();
   const marketPrice = reserves[1] / reserves[0];
 
@@ -103,7 +103,7 @@ export function prettifySeconds(seconds: number, resolution?: string) {
   return result;
 }
 
-function getSohmTokenImage() {
+function getSpsiTokenImage() {
   return <SvgIcon component={SOhmImg} viewBox="0 0 100 100" style={{ height: "1rem", width: "1rem" }} />;
 }
 
@@ -114,8 +114,8 @@ export function getOhmTokenImage(w?: number, h?: number) {
 }
 
 export function getTokenImage(name: string) {
-  if (name === "ohm") return getOhmTokenImage();
-  if (name === "sohm") return getSohmTokenImage();
+  if (name === "psi") return getOhmTokenImage();
+  if (name === "spsi") return getSpsiTokenImage();
 }
 
 // TS-REFACTOR-NOTE - Used for:

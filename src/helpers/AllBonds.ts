@@ -2,20 +2,20 @@ import { StableBond, LPBond, NetworkID, CustomBond } from "src/lib/Bond";
 import { addresses } from "src/constants";
 
 import { ReactComponent as DaiImg } from "src/assets/tokens/DAI.svg";
-import { ReactComponent as OhmDaiImg } from "src/assets/tokens/PSI-DAI.svg";
+import { ReactComponent as PsiDaiImg } from "src/assets/tokens/PSI-DAI.svg";
 import { ReactComponent as FraxImg } from "src/assets/tokens/FRAX.svg";
-import { ReactComponent as OhmFraxImg } from "src/assets/tokens/PSI-FRAX.svg";
-import { ReactComponent as OhmLusdImg } from "src/assets/tokens/PSI-LUSD.svg";
+import { ReactComponent as PsiFraxImg } from "src/assets/tokens/PSI-FRAX.svg";
+import { ReactComponent as PsiLusdImg } from "src/assets/tokens/PSI-LUSD.svg";
 import { ReactComponent as wETHImg } from "src/assets/tokens/wETH.svg";
 import { ReactComponent as LusdImg } from "src/assets/tokens/LUSD.svg";
 
-import { abi as FraxOhmBondContract } from "src/abi/bonds/OhmFraxContract.json";
-import { abi as BondOhmDaiContract } from "src/abi/bonds/OhmDaiContract.json";
-import { abi as BondOhmLusdContract } from "src/abi/bonds/OhmLusdContract.json";
+import { abi as FraxPsiBondContract } from "src/abi/bonds/PsiFraxContract.json";
+import { abi as BondPsiDaiContract } from "src/abi/bonds/PsiDaiContract.json";
+import { abi as BondPsiLusdContract } from "src/abi/bonds/PsiLusdContract.json";
 import { abi as DaiBondContract } from "src/abi/bonds/DaiContract.json";
-import { abi as ReserveOhmLusdContract } from "src/abi/reserves/OhmLusd.json";
-import { abi as ReserveOhmDaiContract } from "src/abi/reserves/OhmDai.json";
-import { abi as ReserveOhmFraxContract } from "src/abi/reserves/OhmFrax.json";
+import { abi as ReservePsiLusdContract } from "src/abi/reserves/PsiLusd.json";
+import { abi as ReservePsiDaiContract } from "src/abi/reserves/PsiDai.json";
+import { abi as ReservePsiFraxContract } from "src/abi/reserves/PsiFrax.json";
 import { abi as FraxBondContract } from "src/abi/bonds/FraxContract.json";
 import { abi as LusdBondContract } from "src/abi/bonds/LusdContract.json";
 import { abi as EthBondContract } from "src/abi/bonds/EthContract.json";
@@ -103,13 +103,13 @@ export const eth = new CustomBond({
   },
 });
 
-export const ohm_dai = new LPBond({
-  name: "ohm_dai_lp",
+export const psi_dai = new LPBond({
+  name: "psi_dai_lp",
   displayName: "PSI-DAI LP",
   bondToken: "DAI",
-  bondIconSvg: OhmDaiImg,
-  bondContractABI: BondOhmDaiContract,
-  reserveContract: ReserveOhmDaiContract,
+  bondIconSvg: PsiDaiImg,
+  bondContractABI: BondPsiDaiContract,
+  reserveContract: ReservePsiDaiContract,
   networkAddrs: {
     [NetworkID.Mainnet]: {
       bondAddress: "0x956c43998316b6a2F21f89a1539f73fB5B78c151",
@@ -124,13 +124,13 @@ export const ohm_dai = new LPBond({
     "https://app.sushi.com/add/0x383518188c0c6d7730d91b2c03a03c837814a899/0x6b175474e89094c44da98b954eedeac495271d0f",
 });
 
-export const ohm_frax = new LPBond({
-  name: "ohm_frax_lp",
+export const psi_frax = new LPBond({
+  name: "psi_frax_lp",
   displayName: "PSI-FRAX LP",
   bondToken: "FRAX",
-  bondIconSvg: OhmFraxImg,
-  bondContractABI: FraxOhmBondContract,
-  reserveContract: ReserveOhmFraxContract,
+  bondIconSvg: PsiFraxImg,
+  bondContractABI: FraxPsiBondContract,
+  reserveContract: ReservePsiFraxContract,
   networkAddrs: {
     [NetworkID.Mainnet]: {
       bondAddress: "0xc20CffF07076858a7e642E396180EC390E5A02f7",
@@ -145,20 +145,20 @@ export const ohm_frax = new LPBond({
     "https://app.uniswap.org/#/add/v2/0x853d955acef822db058eb8505911ed77f175b99e/0x383518188c0c6d7730d91b2c03a03c837814a899",
 });
 
-export const ohm_lusd = new LPBond({
-  name: "ohm_lusd_lp",
+export const psi_lusd = new LPBond({
+  name: "psi_lusd_lp",
   displayName: "PSI-LUSD LP",
   bondToken: "LUSD",
-  bondIconSvg: OhmLusdImg,
-  bondContractABI: BondOhmLusdContract,
-  reserveContract: ReserveOhmLusdContract,
+  bondIconSvg: PsiLusdImg,
+  bondContractABI: BondPsiLusdContract,
+  reserveContract: ReservePsiLusdContract,
   networkAddrs: {
     [NetworkID.Mainnet]: {
       bondAddress: "0xFB1776299E7804DD8016303Df9c07a65c80F67b6",
       reserveAddress: "0xfDf12D1F85b5082877A6E070524f50F6c84FAa6b",
     },
     [NetworkID.Testnet]: {
-      // NOTE (appleseed-lusd): using ohm-dai rinkeby contracts
+      // NOTE (appleseed-lusd): using psi-dai rinkeby contracts
       bondAddress: "0xcF449dA417cC36009a1C6FbA78918c31594B9377",
       reserveAddress: "0x8D5a22Fb6A1840da602E56D1a260E56770e0bCE2",
     },
@@ -171,7 +171,7 @@ export const ohm_lusd = new LPBond({
 // Is it a stableCoin bond? use `new StableBond`
 // Is it an LP Bond? use `new LPBond`
 // Add new bonds to this array!!
-export const allBonds = [dai, frax, eth, ohm_dai, ohm_frax, lusd, ohm_lusd];
+export const allBonds = [dai, frax, eth, psi_dai, psi_frax, lusd, psi_lusd];
 export const allBondsMap = allBonds.reduce((prevVal, bond) => {
   return { ...prevVal, [bond.name]: bond };
 }, {});
