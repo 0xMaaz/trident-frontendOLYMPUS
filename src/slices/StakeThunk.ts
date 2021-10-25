@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
 import { addresses } from "../constants";
 import { abi as ierc20Abi } from "../abi/IERC20.json";
-import { abi as OlympusStaking } from "../abi/OlympusStakingv2.json";
+import { abi as TridentStaking } from "../abi/TridentStakingv2.json";
 import { abi as StakingHelper } from "../abi/StakingHelper.json";
 import { clearPendingTxn, fetchPendingTxns, getStakingTypeText } from "./PendingTxnsSlice";
 import { createAsyncThunk } from "@reduxjs/toolkit";
@@ -78,7 +78,7 @@ export const changeStake = createAsyncThunk(
     }
 
     const signer = provider.getSigner();
-    const staking = new ethers.Contract(addresses[networkID].STAKING_ADDRESS as string, OlympusStaking, signer);
+    const staking = new ethers.Contract(addresses[networkID].STAKING_ADDRESS as string, TridentStaking, signer);
     const stakingHelper = new ethers.Contract(
       addresses[networkID].STAKING_HELPER_ADDRESS as string,
       StakingHelper,
