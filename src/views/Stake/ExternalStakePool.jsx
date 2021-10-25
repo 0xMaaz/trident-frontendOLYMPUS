@@ -67,7 +67,7 @@ export default function ExternalStakePool() {
 
   return (
     <Zoom in={true}>
-      <Paper className={`ohm-card secondary ${isSmallScreen && "mobile"}`}>
+      <Paper className={`psi-card secondary ${isSmallScreen && "mobile"}`}>
         <div className="card-header">
           <Typography variant="h5">Farm Pool</Typography>
         </div>
@@ -88,7 +88,7 @@ export default function ExternalStakePool() {
                 <TableBody>
                   <TableRow>
                     <TableCell>
-                      <Box className="ohm-pairs">
+                      <Box className="psi-pairs">
                         <BondLogo bond={{ bondIconSvg: OhmLusdImg, isLP: true }}></BondLogo>
                         <Typography>PSI-LUSD</Typography>
                       </Box>
@@ -136,7 +136,7 @@ export default function ExternalStakePool() {
           ) : (
             <div className="stake-pool">
               <div className={`pool-card-top-row ${isMobileScreen && "small"}`}>
-                <Box className="ohm-pairs">
+                <Box className="psi-pairs">
                   <BondLogo bond={{ bondIconSvg: OhmLusdImg, isLP: true }}></BondLogo>
                   <Typography gutterBottom={false}>PSI-LUSD</Typography>
                 </Box>

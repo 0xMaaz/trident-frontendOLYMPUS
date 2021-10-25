@@ -158,7 +158,7 @@ function Stake() {
   return (
     <div id="stake-view">
       <Zoom in={true} onEntered={() => setZoomed(true)}>
-        <Paper className={`ohm-card`}>
+        <Paper className={`psi-card`}>
           <Grid container direction="column" spacing={2}>
             <Grid item>
               <div className="card-header">
@@ -167,10 +167,10 @@ function Stake() {
 
                 {address && oldSohmBalance > 0.01 && (
                   <Link
-                    className="migrate-sohm-button"
+                    className="migrate-spsi-button"
                     style={{ textDecoration: "none" }}
                     href="https://docs.tridentdao.finance/using-the-website/migrate"
-                    aria-label="migrate-sohm"
+                    aria-label="migrate-spsi"
                     target="_blank"
                   >
                     <NewReleases viewBox="0 0 24 24" />
@@ -278,7 +278,7 @@ function Stake() {
                             </Typography>
                           </Box>
                         ) : (
-                          <FormControl className="ohm-input" variant="outlined" color="primary">
+                          <FormControl className="psi-input" variant="outlined" color="primary">
                             <InputLabel htmlFor="amount-input"></InputLabel>
                             <OutlinedInput
                               id="amount-input"

@@ -91,7 +91,7 @@ function TreasuryDashboard() {
         }}
       >
         <Box className={`hero-metrics`}>
-          <Paper className="ohm-card">
+          <Paper className="psi-card">
             <Box display="flex" flexWrap="wrap" justifyContent="space-between" alignItems="center">
               <Box className="metric market">
                 <Typography variant="h6" color="textSecondary">
@@ -170,7 +170,7 @@ function TreasuryDashboard() {
         <Zoom in={true}>
           <Grid container spacing={2} className="data-grid">
             <Grid item lg={6} md={6} sm={12} xs={12}>
-              <Paper className="ohm-card ohm-chart-card">
+              <Paper className="psi-card psi-chart-card">
                 <Chart
                   type="area"
                   data={data}
@@ -188,7 +188,7 @@ function TreasuryDashboard() {
             </Grid>
 
             <Grid item lg={6} md={6} sm={12} xs={12}>
-              <Paper className="ohm-card ohm-chart-card">
+              <Paper className="psi-card psi-chart-card">
                 <Chart
                   type="stack"
                   data={data}
@@ -216,7 +216,7 @@ function TreasuryDashboard() {
             </Grid>
 
             <Grid item lg={6} md={6} sm={12} xs={12}>
-              <Paper className="ohm-card ohm-chart-card">
+              <Paper className="psi-card psi-chart-card">
                 <Chart
                   type="stack"
                   data={data}
@@ -240,7 +240,7 @@ function TreasuryDashboard() {
             </Grid>
 
             <Grid item lg={6} md={6} sm={12} xs={12}>
-              <Paper className="ohm-card">
+              <Paper className="psi-card">
                 <Chart
                   type="area"
                   data={data}
@@ -260,7 +260,7 @@ function TreasuryDashboard() {
             </Grid>
             {/*  Temporarily removed until correct data is in the graph */}
             {/* <Grid item lg={6} md={12} sm={12} xs={12}>
-              <Paper className="ohm-card">
+              <Paper className="psi-card">
                 <Chart
                   type="bar"
                   data={data}
@@ -278,7 +278,7 @@ function TreasuryDashboard() {
             </Grid> */}
 
             <Grid item lg={6} md={6} sm={12} xs={12}>
-              <Paper className="ohm-card">
+              <Paper className="psi-card">
                 <Chart
                   type="area"
                   data={staked}
@@ -296,7 +296,7 @@ function TreasuryDashboard() {
             </Grid>
 
             <Grid item lg={6} md={6} sm={12} xs={12}>
-              <Paper className="ohm-card">
+              <Paper className="psi-card">
                 <Chart
                   type="line"
                   scale="log"
@@ -317,7 +317,7 @@ function TreasuryDashboard() {
             </Grid>
 
             <Grid item lg={6} md={6} sm={12} xs={12}>
-              <Paper className="ohm-card">
+              <Paper className="psi-card">
                 <Chart
                   type="line"
                   data={runway}
