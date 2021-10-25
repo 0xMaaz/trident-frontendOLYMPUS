@@ -272,7 +272,7 @@
     },
     {
       "inputs": [
-        { "internalType": "enum OlympusBondDepository.PARAMETER", "name": "_parameter", "type": "uint8" },
+        { "internalType": "enum TridentBondDepository.PARAMETER", "name": "_parameter", "type": "uint8" },
         { "internalType": "uint256", "name": "_input", "type": "uint256" }
       ],
       "name": "setBondTerms",

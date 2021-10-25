@@ -1,25 +1,25 @@
 import { StaticJsonRpcProvider } from "@ethersproject/providers";
 import { NetworkID } from "src/lib/Bond";
-import { ohm_lusd, lusd } from "../helpers/AllBonds";
-import { abi as OhmLusdCrucible } from "src/abi/OhmLusdCrucible.json";
+import { psi_lusd, lusd } from "./AllBonds";
+import { abi as PsiLusdCrucible } from "src/abi/PsiLusdCrucible.json";
 import { abi as UniswapIERC20 } from "src/abi/UniswapIERC20.json";
 import { BigNumber, ethers } from "ethers";
 import { addresses } from "src/constants";
-import { getTokenPrice } from "../helpers";
+import { getTokenPrice } from ".";
 
 export const calcAludelDetes = async (networkID: NetworkID, provider: StaticJsonRpcProvider) => {
   const crucibleAddress = addresses[networkID].CRUCIBLE_PSI_LUSD;
-  const aludelContract = new ethers.Contract(crucibleAddress as string, OhmLusdCrucible, provider);
+  const aludelContract = new ethers.Contract(crucibleAddress as string, PsiLusdCrucible, provider);
   const aludelData = await aludelContract.getAludelData();
   // getting contractAddresses & Pricing for calculations below
-  let ohmPrice = await getTokenPrice("trident");
-  let ohmContractAddress = addresses[networkID].PSI_ADDRESS.toLowerCase();
+  let psiPrice = await getTokenPrice("trident");
+  let psiContractAddress = addresses[networkID].PSI_ADDRESS.toLowerCase();
 
   let lusdPrice = await getTokenPrice("liquity-usd");
   let lusdContractAddress = lusd.getAddressForReserve(networkID).toLowerCase();
 
-  let ohmLusdPrice = await ohm_lusd.getBondReservePrice(networkID, provider);
-  let ohmLusdContractAddress = ohm_lusd.getAddressForReserve(networkID).toLowerCase();
+  let psiLusdPrice = await psi_lusd.getBondReservePrice(networkID, provider);
+  let psiLusdContractAddress = psi_lusd.getAddressForReserve(networkID).toLowerCase();
 
   let lqtyPrice = await getTokenPrice("liquity");
   let lqtyContractAddress = addresses[networkID].LQTY.toLowerCase();
@@ -29,8 +29,8 @@ export const calcAludelDetes = async (networkID: NetworkID, provider: StaticJson
 
   // set addresses & pricing in dictionary
   let usdValues: { [key: string]: number } = {};
-  usdValues[ohmContractAddress] = ohmPrice;
-  usdValues[ohmLusdContractAddress] = ohmLusdPrice;
+  usdValues[psiContractAddress] = psiPrice;
+  usdValues[psiLusdContractAddress] = psiLusdPrice;
   usdValues[lqtyContractAddress] = lqtyPrice;
   usdValues[mistContractAddress] = mistPrice;
 
@@ -122,11 +122,11 @@ export const calcAludelDetes = async (networkID: NetworkID, provider: StaticJson
 
   let lusdContract = new ethers.Contract(lusdContractAddress, UniswapIERC20, provider);
 
-  let stakedOhm = (await rewardTokenContract.balanceOf(aludelData.stakingToken)) / 10 ** rewardTokenDecimals;
+  let stakedPsi = (await rewardTokenContract.balanceOf(aludelData.stakingToken)) / 10 ** rewardTokenDecimals;
   // 18 decimals for LUSD
   let stakedLusd = (await lusdContract.balanceOf(aludelData.stakingToken)) / 10 ** 18;
 
-  let totalStakedTokensUsd = stakedOhm * ohmPrice + stakedLusd * lusdPrice;
+  let totalStakedTokensUsd = stakedPsi * psiPrice + stakedLusd * lusdPrice;
 
   let stakingTokenContract = new ethers.Contract(aludelData.stakingToken, UniswapIERC20, provider);
   let sushiTokenSupply = (await stakingTokenContract.totalSupply()) / 10 ** 18;

@@ -124,7 +124,7 @@
     },
     {
       "inputs": [
-        { "internalType": "enum OlympusStaking.CONTRACTS", "name": "_contract", "type": "uint8" },
+        { "internalType": "enum TridentStaking.CONTRACTS", "name": "_contract", "type": "uint8" },
         { "internalType": "address", "name": "_address", "type": "address" }
       ],
       "name": "setContract",
