@@ -1,9 +1,9 @@
 import { ethers } from "ethers";
 import { addresses } from "../constants";
-import { abi as OlympusStaking } from "../abi/OlympusStaking.json";
-import { abi as OlympusStakingv2 } from "../abi/OlympusStakingv2.json";
+import { abi as TridentStaking } from "../abi/TridentStaking.json";
+import { abi as TridentStakingv2 } from "../abi/TridentStakingv2.json";
 import { abi as sPSI } from "../abi/sPSI.json";
-import { abi as sPSIv2 } from "../abi/sOhmv2.json";
+import { abi as sPSIv2 } from "../abi/sPSIv2.json";
 import { setAll, getTokenPrice, getMarketPrice } from "../helpers";
 import { NodeHelper } from "../helpers/NodeHelper";
 import apollo from "../lib/apolloClient.js";
@@ -84,12 +84,12 @@ export const loadAppDetails = createAsyncThunk(
 
     const stakingContract = new ethers.Contract(
       addresses[networkID].STAKING_ADDRESS as string,
-      OlympusStakingv2,
+      TridentStakingv2,
       provider,
     );
     const oldStakingContract = new ethers.Contract(
       addresses[networkID].OLD_STAKING_ADDRESS as string,
-      OlympusStaking,
+      TridentStaking,
       provider,
     );
     const sohmMainContract = new ethers.Contract(addresses[networkID].SPSI_ADDRESS as string, sPSIv2, provider);

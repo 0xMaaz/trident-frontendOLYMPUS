@@ -2,7 +2,7 @@ import { ethers } from "ethers";
 import { addresses } from "../constants";
 import { abi as ierc20Abi } from "../abi/IERC20.json";
 import { abi as sPSI } from "../abi/sPSI.json";
-import { abi as sPSIv2 } from "../abi/sOhmv2.json";
+import { abi as sPSIv2 } from "../abi/sPSIv2.json";
 import { abi as fuseProxy } from "../abi/FuseProxy.json";
 import { abi as wsPSI } from "../abi/wsPSI.json";
 
