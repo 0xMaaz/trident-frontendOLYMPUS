@@ -2,10 +2,10 @@ import { setAll } from "../helpers";
 import { createSlice, createSelector, createAsyncThunk } from "@reduxjs/toolkit";
 import { IBaseAddressAsyncThunk } from "./interfaces";
 
-import { calcAludelDetes } from "../helpers/PsiLusdCrucible";
+import { calcAludelDetes } from "../helpers/PsiMimCrucible";
 
-export const getLusdData = createAsyncThunk(
-  "stake/getLusdData",
+export const getMimData = createAsyncThunk(
+  "stake/getMimData",
   async ({ address, networkID, provider }: IBaseAddressAsyncThunk) => {
     // only works on mainnet
     if (networkID !== 1) {
@@ -21,49 +21,49 @@ export const getLusdData = createAsyncThunk(
         apy: avgApy,
         tvl: crucibleDetes.tvlUsd,
         // NOTE (appleseed): balance is in accountSlice for the bond
-        // balance: ethers.utils.formatUnits(sushiPsiLusdBalance, "gwei"),
+        // balance: ethers.utils.formatUnits(sushiPsiMimBalance, "gwei"),
       };
     }
   },
 );
 
 /**
- * interface for object returned from getLusdData + loading status
+ * interface for object returned from getMimData + loading status
  */
-export interface IUserLusdDetails {
+export interface IUserMimDetails {
   apy: number;
   tvl: number;
   loading: boolean;
 }
 
-const initialState: IUserLusdDetails = {
+const initialState: IUserMimDetails = {
   loading: false,
   apy: 0,
   tvl: 0,
 };
 
-const lusdSlice = createSlice({
-  name: "lusdData",
+const mimSlice = createSlice({
+  name: "mimData",
   initialState,
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(getLusdData.pending, state => {
+      .addCase(getMimData.pending, state => {
         state.loading = true;
       })
-      .addCase(getLusdData.fulfilled, (state, action) => {
+      .addCase(getMimData.fulfilled, (state, action) => {
         setAll(state, action.payload);
         state.loading = false;
       })
-      .addCase(getLusdData.rejected, (state, { error }) => {
+      .addCase(getMimData.rejected, (state, { error }) => {
         state.loading = false;
         console.log(error);
       });
   },
 });
 
-export default lusdSlice.reducer;
+export default mimSlice.reducer;
 
-const baseInfo = (state: any) => state.lusdData;
+const baseInfo = (state: any) => state.mimData;
 
-export const getLusdState = createSelector(baseInfo, app => app);
+export const getMimState = createSelector(baseInfo, app => app);
