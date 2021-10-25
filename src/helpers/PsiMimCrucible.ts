@@ -1,28 +1,25 @@
 import { StaticJsonRpcProvider } from "@ethersproject/providers";
 import { NetworkID } from "src/lib/Bond";
-import { psi_lusd, lusd } from "./AllBonds";
-import { abi as PsiLusdCrucible } from "src/abi/PsiLusdCrucible.json";
+import { psi_mim, mim } from "./AllBonds";
+import { abi as PsiMimCrucible } from "src/abi/PsiMimCrucible.json";
 import { abi as UniswapIERC20 } from "src/abi/UniswapIERC20.json";
 import { BigNumber, ethers } from "ethers";
 import { addresses } from "src/constants";
 import { getTokenPrice } from ".";
 
 export const calcAludelDetes = async (networkID: NetworkID, provider: StaticJsonRpcProvider) => {
-  const crucibleAddress = addresses[networkID].CRUCIBLE_PSI_LUSD;
-  const aludelContract = new ethers.Contract(crucibleAddress as string, PsiLusdCrucible, provider);
+  const crucibleAddress = addresses[networkID].CRUCIBLE_PSI_MIM;
+  const aludelContract = new ethers.Contract(crucibleAddress as string, PsiMimCrucible, provider);
   const aludelData = await aludelContract.getAludelData();
   // getting contractAddresses & Pricing for calculations below
   let psiPrice = await getTokenPrice("trident");
   let psiContractAddress = addresses[networkID].PSI_ADDRESS.toLowerCase();
 
-  let lusdPrice = await getTokenPrice("liquity-usd");
-  let lusdContractAddress = lusd.getAddressForReserve(networkID).toLowerCase();
+  let mimPrice = await getTokenPrice("magic-internet-money");
+  let mimContractAddress = mim.getAddressForReserve(networkID).toLowerCase();
 
-  let psiLusdPrice = await psi_lusd.getBondReservePrice(networkID, provider);
-  let psiLusdContractAddress = psi_lusd.getAddressForReserve(networkID).toLowerCase();
-
-  let lqtyPrice = await getTokenPrice("liquity");
-  let lqtyContractAddress = addresses[networkID].LQTY.toLowerCase();
+  let psiMimPrice = await psi_mim.getBondReservePrice(networkID, provider);
+  let psiMimContractAddress = psi_mim.getAddressForReserve(networkID).toLowerCase();
 
   let mistPrice = await getTokenPrice("alchemist");
   let mistContractAddress = addresses[networkID].MIST.toLowerCase();
@@ -30,8 +27,7 @@ export const calcAludelDetes = async (networkID: NetworkID, provider: StaticJson
   // set addresses & pricing in dictionary
   let usdValues: { [key: string]: number } = {};
   usdValues[psiContractAddress] = psiPrice;
-  usdValues[psiLusdContractAddress] = psiLusdPrice;
-  usdValues[lqtyContractAddress] = lqtyPrice;
+  usdValues[psiMimContractAddress] = psiMimPrice;
   usdValues[mistContractAddress] = mistPrice;
 
   // console.log("usdValues", usdValues);
@@ -120,13 +116,13 @@ export const calcAludelDetes = async (networkID: NetworkID, provider: StaticJson
   // usd value of rewardToken that are released
   let rewardsPreviouslyReleasedUsdValue = rewardsPreviouslyReleased * rewardTokenUsdValue;
 
-  let lusdContract = new ethers.Contract(lusdContractAddress, UniswapIERC20, provider);
+  let mimContract = new ethers.Contract(mimContractAddress, UniswapIERC20, provider);
 
   let stakedPsi = (await rewardTokenContract.balanceOf(aludelData.stakingToken)) / 10 ** rewardTokenDecimals;
-  // 18 decimals for LUSD
-  let stakedLusd = (await lusdContract.balanceOf(aludelData.stakingToken)) / 10 ** 18;
+  // 18 decimals for MIM
+  let stakedMim = (await mimContract.balanceOf(aludelData.stakingToken)) / 10 ** 18;
 
-  let totalStakedTokensUsd = stakedPsi * psiPrice + stakedLusd * lusdPrice;
+  let totalStakedTokensUsd = stakedPsi * psiPrice + stakedMim * mimPrice;
 
   let stakingTokenContract = new ethers.Contract(aludelData.stakingToken, UniswapIERC20, provider);
   let sushiTokenSupply = (await stakingTokenContract.totalSupply()) / 10 ** 18;

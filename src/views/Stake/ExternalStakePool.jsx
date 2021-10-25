@@ -19,9 +19,9 @@ import { Skeleton } from "@material-ui/lab";
 
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import BondLogo from "../../components/BondLogo";
-import { ReactComponent as PsiLusdImg } from "src/assets/tokens/PSI-LUSD.svg";
+import { ReactComponent as PsiMimImg } from "src/assets/tokens/PSI-MIM.svg";
 import { ReactComponent as ArrowUp } from "../../assets/icons/arrow-up.svg";
-import { getLusdData } from "../../slices/LusdSlice";
+import { getMimData } from "../../slices/MimSlice";
 import { useWeb3Context } from "src/hooks/web3Context";
 import { trim } from "../../helpers";
 
@@ -32,17 +32,17 @@ export default function ExternalStakePool() {
   const isSmallScreen = useMediaQuery("(max-width: 705px)");
   const isMobileScreen = useMediaQuery("(max-width: 513px)");
 
-  const isLusdLoading = useSelector(state => state.lusdData.loading);
-  const lusdData = useSelector(state => {
-    return state.lusdData;
+  const isMimLoading = useSelector(state => state.mimData.loading);
+  const mimData = useSelector(state => {
+    return state.mimData;
   });
 
-  const psiLusdReserveBalance = useSelector(state => {
-    return state.account && state.account.bonds?.psi_lusd_lp?.balance;
+  const psiMimReserveBalance = useSelector(state => {
+    return state.account && state.account.bonds?.psi_mim_lp?.balance;
   });
 
-  const loadLusdData = async () => {
-    await dispatch(getLusdData({ address: address, provider: provider, networkID: chainID }));
+  const loadMimData = async () => {
+    await dispatch(getMimData({ address: address, provider: provider, networkID: chainID }));
   };
 
   useEffect(() => {
@@ -61,7 +61,7 @@ export default function ExternalStakePool() {
   useEffect(() => {
     // don't load ANY details until wallet is Checked
     if (walletChecked) {
-      loadLusdData();
+      loadMimData();
     }
   }, [walletChecked]);
 
@@ -89,21 +89,21 @@ export default function ExternalStakePool() {
                   <TableRow>
                     <TableCell>
                       <Box className="psi-pairs">
-                        <BondLogo bond={{ bondIconSvg: PsiLusdImg, isLP: true }}></BondLogo>
-                        <Typography>PSI-LUSD</Typography>
+                        <BondLogo bond={{ bondIconSvg: PsiMimImg, isLP: true }}></BondLogo>
+                        <Typography>PSI-MIM</Typography>
                       </Box>
                     </TableCell>
                     <TableCell align="left">
-                      {isLusdLoading ? (
+                      {isMimLoading ? (
                         <Skeleton width="80px" />
-                      ) : lusdData.apy === 0 ? (
+                      ) : mimData.apy === 0 ? (
                         "Coming Soon"
                       ) : (
-                        trim(lusdData.apy, 1) + "%"
+                        trim(mimData.apy, 1) + "%"
                       )}
                     </TableCell>
                     <TableCell align="left">
-                      {isLusdLoading ? (
+                      {isMimLoading ? (
                         <Skeleton width="80px" />
                       ) : (
                         new Intl.NumberFormat("en-US", {
@@ -111,11 +111,11 @@ export default function ExternalStakePool() {
                           currency: "USD",
                           maximumFractionDigits: 0,
                           minimumFractionDigits: 0,
-                        }).format(lusdData.tvl)
+                        }).format(mimData.tvl)
                       )}
                     </TableCell>
                     <TableCell align="left">
-                      {isLusdLoading ? <Skeleton width="80px" /> : (trim(psiLusdReserveBalance, 2) || 0) + " SLP"}
+                      {isMimLoading ? <Skeleton width="80px" /> : (trim(psiMimReserveBalance, 2) || 0) + " SLP"}
                     </TableCell>
                     <TableCell align="center">
                       <Button
@@ -137,27 +137,27 @@ export default function ExternalStakePool() {
             <div className="stake-pool">
               <div className={`pool-card-top-row ${isMobileScreen && "small"}`}>
                 <Box className="psi-pairs">
-                  <BondLogo bond={{ bondIconSvg: PsiLusdImg, isLP: true }}></BondLogo>
-                  <Typography gutterBottom={false}>PSI-LUSD</Typography>
+                  <BondLogo bond={{ bondIconSvg: PsiMimImg, isLP: true }}></BondLogo>
+                  <Typography gutterBottom={false}>PSI-MIM</Typography>
                 </Box>
               </div>
               <div className="pool-data">
                 <div className="data-row">
                   <Typography>APY</Typography>
                   <Typography>
-                    {isLusdLoading ? (
+                    {isMimLoading ? (
                       <Skeleton width="80px" />
-                    ) : lusdData.apy === 0 ? (
+                    ) : mimData.apy === 0 ? (
                       "Coming Soon"
                     ) : (
-                      trim(lusdData.apy, 1) + "%"
+                      trim(mimData.apy, 1) + "%"
                     )}
                   </Typography>
                 </div>
                 <div className="data-row">
                   <Typography>TVD</Typography>
                   <Typography>
-                    {isLusdLoading ? (
+                    {isMimLoading ? (
                       <Skeleton width="80px" />
                     ) : (
                       new Intl.NumberFormat("en-US", {
@@ -165,14 +165,14 @@ export default function ExternalStakePool() {
                         currency: "USD",
                         maximumFractionDigits: 0,
                         minimumFractionDigits: 0,
-                      }).format(lusdData.tvl)
+                      }).format(mimData.tvl)
                     )}
                   </Typography>
                 </div>
                 <div className="data-row">
                   <Typography>Balance</Typography>
                   <Typography>
-                    {isLusdLoading ? <Skeleton width="80px" /> : (trim(lusdData.balance, 2) || 0) + "LP"}
+                    {isMimLoading ? <Skeleton width="80px" /> : (trim(mimData.balance, 2) || 0) + "LP"}
                   </Typography>
                 </div>
 
