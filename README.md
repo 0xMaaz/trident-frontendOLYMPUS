@@ -12,7 +12,7 @@ Required:
 
 ```bash
 $ git clone https://github.com/0xMaaz/trident-frontend.git
-$ cd olympusdao
+$ cd trident-frontend
 
 # set up your environment variables
 # read the comments in the .env files for what is required/optional
