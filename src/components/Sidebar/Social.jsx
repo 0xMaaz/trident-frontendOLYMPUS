@@ -21,9 +21,7 @@ export default function Social() {
         <SvgIcon color="primary" component={Twitter} />
       </Link>
 
-      {/* TODO: Point Discord link to correct invite link*/}
-
-      <Link href="https://discord.gg/6QjjtUcfM4" target="_blank">
+      <Link href="https://discord.gg/4ZSaZvMGtQ" target="_blank">
         <SvgIcon color="primary" component={Discord} />
       </Link>
     </div>
