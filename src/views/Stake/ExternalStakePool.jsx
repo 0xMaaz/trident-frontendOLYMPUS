@@ -117,6 +117,7 @@ export default function ExternalStakePool() {
                     <TableCell align="left">
                       {isMimLoading ? <Skeleton width="80px" /> : (trim(psiMimReserveBalance, 2) || 0) + " SLP"}
                     </TableCell>
+                    {/* TODO: Figure out how to get a rewards program in Crucible */}
                     <TableCell align="center">
                       <Button
                         variant="outlined"

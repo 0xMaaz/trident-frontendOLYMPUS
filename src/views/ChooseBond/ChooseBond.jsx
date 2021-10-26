@@ -23,6 +23,8 @@ import ClaimBonds from "./ClaimBonds";
 import _ from "lodash";
 import { allBondsMap } from "src/helpers/AllBonds";
 
+//TODO: Decide which bonds we are going to support
+
 function ChooseBond() {
   const { bonds } = useBonds();
   const isSmallScreen = useMediaQuery("(max-width: 733px)"); // change to breakpoint query

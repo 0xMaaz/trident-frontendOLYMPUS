@@ -93,6 +93,7 @@ function PsiMenu() {
                     rel="noreferrer"
                   >
                     <Button size="large" variant="contained" color="secondary" fullWidth>
+                      {/* TODO: Fix Sushiswap link */}
                       <Typography align="left">
                         Buy on Sushiswap <SvgIcon component={ArrowUpIcon} htmlColor="#A3A3A3" />
                       </Typography>
@@ -105,6 +106,7 @@ function PsiMenu() {
                     rel="noreferrer"
                   >
                     <Button size="large" variant="contained" color="secondary" fullWidth>
+                      {/* TODO: Fix Uniswap link */}
                       <Typography align="left">
                         Buy on Uniswap <SvgIcon component={ArrowUpIcon} htmlColor="#A3A3A3" />
                       </Typography>
@@ -112,6 +114,7 @@ function PsiMenu() {
                   </Link>
 
                   <Link href={`https://abracadabra.money/pool/10`} target="_blank" rel="noreferrer">
+                    {/* TODO: Fix wrap sPSI on Abracadabra link */}
                     <Button size="large" variant="contained" color="secondary" fullWidth>
                       <Typography align="left">
                         Wrap sPSI on Abracadabra <SvgIcon component={ArrowUpIcon} htmlColor="#A3A3A3" />
@@ -123,6 +126,7 @@ function PsiMenu() {
                 <Box component="div" className="data-links">
                   <Divider color="secondary" className="less-margin" />
                   <Link href={`https://dune.xyz/shadow/Olympus-(PSI)`} target="_blank" rel="noreferrer">
+                    {/* TODO: Fix Shadow's Dune Dashboard link */}
                     <Button size="large" variant="contained" color="secondary" fullWidth>
                       <Typography align="left">
                         Shadow's Dune Dashboard <SvgIcon component={ArrowUpIcon} htmlColor="#A3A3A3" />
@@ -134,6 +138,7 @@ function PsiMenu() {
                 {isEthereumAPIAvailable ? (
                   <Box className="add-tokens">
                     <Divider color="secondary" />
+                    {/* TODO: Fix add token to wallet links */}
                     <p>ADD TOKEN TO WALLET</p>
                     <Box display="flex" flexDirection="row" justifyContent="space-between">
                       <Button variant="contained" color="secondary" onClick={addTokenToWallet("PSI", PSI_ADDRESS)}>
@@ -155,17 +160,6 @@ function PsiMenu() {
                     </Box>
                   </Box>
                 ) : null}
-
-                <Divider color="secondary" />
-                <Link
-                  href="https://docs.tridentdao.finance/using-the-website/unstaking_lp"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <Button size="large" variant="contained" color="secondary" fullWidth>
-                    <Typography align="left">Unstake Legacy LP Token</Typography>
-                  </Button>
-                </Link>
               </Paper>
             </Fade>
           );

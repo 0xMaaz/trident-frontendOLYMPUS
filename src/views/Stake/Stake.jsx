@@ -185,6 +185,7 @@ function Stake() {
                 <Grid container spacing={2} alignItems="flex-end">
                   <Grid item xs={12} sm={4} md={4} lg={4}>
                     <div className="stake-apy">
+                      {/* TODO: Figure out how to get the APY */}
                       <Typography variant="h5" color="textSecondary">
                         APY
                       </Typography>
@@ -200,6 +201,7 @@ function Stake() {
 
                   <Grid item xs={12} sm={4} md={4} lg={4}>
                     <div className="stake-tvl">
+                      {/* TODO: Figure out how to get the Total Value Deposited */}
                       <Typography variant="h5" color="textSecondary">
                         Total Value Deposited
                       </Typography>
@@ -220,6 +222,7 @@ function Stake() {
 
                   <Grid item xs={12} sm={4} md={4} lg={4}>
                     <div className="stake-index">
+                      {/* TODO: Figure out how to get the Current Index */}
                       <Typography variant="h5" color="textSecondary">
                         Current Index
                       </Typography>
@@ -233,6 +236,7 @@ function Stake() {
             </Grid>
 
             <div className="staking-area">
+              {/* TODO: Figure out the connect your wallet flow */}
               {!address ? (
                 <div className="stake-wallet-notification">
                   <div className="wallet-menu" id="wallet-menu">

@@ -26,6 +26,7 @@ function Dashboard() {
         <Grid item lg={4} md={4} sm={3} xs={5} className="trident-card">
           <Zoom in={true}>
             <Paper className="psi-card">
+              {/* TODO: Figure out how to get the price */}
               <Typography variant="h6">Price</Typography>
               <Typography variant="h5">
                 {isAppLoading ? <Skeleton width="100px" /> : `$${trim(marketPrice, 2)}`}
@@ -37,6 +38,7 @@ function Dashboard() {
         <Grid item lg={4} md={4} sm={4} xs={7}>
           <Zoom in={true}>
             <Paper className="psi-card">
+              {/* TODO: Figure out how to get the PSI Price */}
               <Typography variant="h6">Market Cap</Typography>
               <Typography variant="h5">
                 {isAppLoading ? (
@@ -57,6 +59,7 @@ function Dashboard() {
         <Grid item lg={4} md={4} sm={5} xs={12}>
           <Zoom in={true}>
             <Paper className="psi-card">
+              {/* TODO: Figure out how to get the circSupply and totalSupply */}
               <Typography variant="h6">Supply (circulating/total)</Typography>
               <Typography variant="h5">
                 {isAppLoading ? (
@@ -81,6 +84,7 @@ function Dashboard() {
       <Box className="main-data-area">
         <Grid container spacing={2} className="data-grid">
           <Grid item lg={4} sm={12}>
+            {/* TODO: Figure out how to implement a dune chart for Total Value Staking */}
             <div className="dune-card">
               <iframe
                 frameBorder="0"
@@ -92,6 +96,7 @@ function Dashboard() {
           </Grid>
 
           <Grid item lg={4} sm={12}>
+            {/* TODO: Figure out how to implement a dune chart for Market value of Treasury */}
             <div className="dune-card">
               <iframe
                 frameBorder="0"
@@ -103,6 +108,7 @@ function Dashboard() {
           </Grid>
 
           <Grid item lg={4} sm={12}>
+            {/* TODO: Figure out how to implement a dune chart for Risk Free Value of Treasury */}
             <div className="dune-card">
               <iframe
                 frameBorder="0"
@@ -114,6 +120,7 @@ function Dashboard() {
           </Grid>
 
           <Grid item lg={4} sm={12}>
+            {/* TODO: Figure out how to implement a dune chart for Total Value Staking */}
             <div className="dune-card">
               <iframe
                 frameBorder="0"
@@ -125,6 +132,7 @@ function Dashboard() {
           </Grid>
 
           <Grid item lg={4} sm={12}>
+            {/* TODO: Figure out how to implement a dune chart for Holders*/}
             <div className="dune-card">
               <iframe
                 frameBorder="0"
@@ -136,6 +144,7 @@ function Dashboard() {
           </Grid>
 
           <Grid item lg={4} sm={12}>
+            {/* TODO: Figure out how to implement a dune chart for APY Over Time */}
             <div className="dune-card">
               <iframe
                 frameBorder="0"
@@ -147,6 +156,7 @@ function Dashboard() {
           </Grid>
 
           <Grid item lg={6} sm={12}>
+            {/* TODO: Figure out how to implement a dune chart for PSI Stakers */}
             <div className="dune-card">
               <iframe
                 frameBorder="0"
@@ -158,6 +168,7 @@ function Dashboard() {
           </Grid>
 
           <Grid item lg={6} sm={12}>
+            {/* TODO: Figure out how to implement a dune chart for Runway Available */}
             <div className="dune-card">
               <iframe
                 frameBorder="0"

@@ -39,6 +39,7 @@ function NavContent() {
         <div className="dapp-menu-top">
           <Box className="branding-header">
             <Link href="https://tridentdao.finance" target="_blank">
+              {/* TODO: Replace this icon with a real TridentIcon */}
               <SvgIcon
                 color="primary"
                 component={TridentIcon}
@@ -87,9 +88,6 @@ function NavContent() {
                   Stake
                 </Typography>
               </Link>
-
-
-
               <Link
                 component={NavLink}
                 id="bond-nav"
