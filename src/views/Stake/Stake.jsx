@@ -162,7 +162,7 @@ function Stake() {
           <Grid container direction="column" spacing={2}>
             <Grid item>
               <div className="card-header">
-                <Typography variant="h5">Single Stake (3, 3)</Typography>
+                <Typography variant="h5">Single Stake (🔱, 🔱)</Typography>
                 <RebaseTimer />
 
                 {address && oldSpsiBalance > 0.01 && (
