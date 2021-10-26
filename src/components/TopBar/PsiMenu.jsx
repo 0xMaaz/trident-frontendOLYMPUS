@@ -7,15 +7,12 @@ import { ReactComponent as InfoIcon } from "../../assets/icons/info-fill.svg";
 import { ReactComponent as ArrowUpIcon } from "../../assets/icons/arrow-up.svg";
 import { ReactComponent as sPsiTokenImg } from "../../assets/tokens/token_sPSI.svg";
 import { ReactComponent as psiTokenImg } from "../../assets/tokens/token_PSI.svg";
-import { ReactComponent as t33TokenImg } from "../../assets/tokens/token_33T.svg";
-
 import "./psimenu.scss";
 import { dai, frax } from "src/helpers/AllBonds";
 import { useWeb3Context } from "../../hooks/web3Context";
 
 import PSIImg from "src/assets/tokens/token_PSI.svg";
 import SPSIImg from "src/assets/tokens/token_sPSI.svg";
-import token33tImg from "src/assets/tokens/token_33T.svg";
 
 const addTokenToWallet = (tokenSymbol, tokenAddress) => async () => {
   if (window.ethereum) {
@@ -28,9 +25,6 @@ const addTokenToWallet = (tokenSymbol, tokenAddress) => async () => {
     switch (tokenSymbol) {
       case "PSI":
         tokenPath = PSIImg;
-        break;
-      case "33T":
-        tokenPath = token33tImg;
         break;
       default:
         tokenPath = SPSIImg;
@@ -99,6 +93,7 @@ function PsiMenu() {
                     rel="noreferrer"
                   >
                     <Button size="large" variant="contained" color="secondary" fullWidth>
+                      {/* TODO: Fix Sushiswap link */}
                       <Typography align="left">
                         Buy on Sushiswap <SvgIcon component={ArrowUpIcon} htmlColor="#A3A3A3" />
                       </Typography>
@@ -111,6 +106,7 @@ function PsiMenu() {
                     rel="noreferrer"
                   >
                     <Button size="large" variant="contained" color="secondary" fullWidth>
+                      {/* TODO: Fix Uniswap link */}
                       <Typography align="left">
                         Buy on Uniswap <SvgIcon component={ArrowUpIcon} htmlColor="#A3A3A3" />
                       </Typography>
@@ -118,6 +114,7 @@ function PsiMenu() {
                   </Link>
 
                   <Link href={`https://abracadabra.money/pool/10`} target="_blank" rel="noreferrer">
+                    {/* TODO: Fix wrap sPSI on Abracadabra link */}
                     <Button size="large" variant="contained" color="secondary" fullWidth>
                       <Typography align="left">
                         Wrap sPSI on Abracadabra <SvgIcon component={ArrowUpIcon} htmlColor="#A3A3A3" />
@@ -129,6 +126,7 @@ function PsiMenu() {
                 <Box component="div" className="data-links">
                   <Divider color="secondary" className="less-margin" />
                   <Link href={`https://dune.xyz/shadow/Olympus-(PSI)`} target="_blank" rel="noreferrer">
+                    {/* TODO: Fix Shadow's Dune Dashboard link */}
                     <Button size="large" variant="contained" color="secondary" fullWidth>
                       <Typography align="left">
                         Shadow's Dune Dashboard <SvgIcon component={ArrowUpIcon} htmlColor="#A3A3A3" />
@@ -140,6 +138,7 @@ function PsiMenu() {
                 {isEthereumAPIAvailable ? (
                   <Box className="add-tokens">
                     <Divider color="secondary" />
+                    {/* TODO: Fix add token to wallet links */}
                     <p>ADD TOKEN TO WALLET</p>
                     <Box display="flex" flexDirection="row" justifyContent="space-between">
                       <Button variant="contained" color="secondary" onClick={addTokenToWallet("PSI", PSI_ADDRESS)}>
@@ -158,28 +157,9 @@ function PsiMenu() {
                         />
                         <Typography variant="body1">sPSI</Typography>
                       </Button>
-                      <Button variant="contained" color="secondary" onClick={addTokenToWallet("33T", PT_TOKEN_ADDRESS)}>
-                        <SvgIcon
-                          component={t33TokenImg}
-                          viewBox="0 0 1000 1000"
-                          style={{ height: "25px", width: "25px" }}
-                        />
-                        <Typography variant="body1">33T</Typography>
-                      </Button>
                     </Box>
                   </Box>
                 ) : null}
-
-                <Divider color="secondary" />
-                <Link
-                  href="https://docs.tridentdao.finance/using-the-website/unstaking_lp"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <Button size="large" variant="contained" color="secondary" fullWidth>
-                    <Typography align="left">Unstake Legacy LP Token</Typography>
-                  </Button>
-                </Link>
               </Paper>
             </Fade>
           );

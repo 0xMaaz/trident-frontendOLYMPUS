@@ -53,30 +53,30 @@ function TreasuryDashboard() {
 
   useEffect(() => {
     apollo(treasuryDataQuery).then(r => {
-      let metrics = r.data.protocolMetrics.map(entry =>
+      let metrics = r?.data?.protocolMetrics.map(entry =>
         Object.entries(entry).reduce((obj, [key, value]) => ((obj[key] = parseFloat(value)), obj), {}),
       );
-      metrics = metrics.filter(pm => pm.treasuryMarketValue > 0);
+      metrics = metrics?.filter(pm => pm.treasuryMarketValue > 0);
       setData(metrics);
 
-      let staked = r.data.protocolMetrics.map(entry => ({
+      let staked = r?.data?.protocolMetrics.map(entry => ({
         staked: (parseFloat(entry.sPsiCirculatingSupply) / parseFloat(entry.psiCirculatingSupply)) * 100,
         timestamp: entry.timestamp,
       }));
-      staked = staked.filter(pm => pm.staked < 100);
+      staked = staked?.filter(pm => pm.staked < 100);
       setStaked(staked);
 
-      let runway = metrics.filter(pm => pm.runway10k > 5);
+      let runway = metrics?.filter(pm => pm.runway10k > 5);
       setRunway(runway);
     });
 
     apollo(rebasesDataQuery).then(r => {
-      let apy = r.data.rebases.map(entry => ({
+      let apy = r?.data?.rebases.map(entry => ({
         apy: Math.pow(parseFloat(entry.percentage) + 1, 365 * 3) * 100,
         timestamp: entry.timestamp,
       }));
 
-      apy = apy.filter(pm => pm.apy < 300000);
+      apy = apy?.filter(pm => pm.apy < 300000);
 
       setApy(apy);
     });
@@ -94,6 +94,7 @@ function TreasuryDashboard() {
           <Paper className="psi-card">
             <Box display="flex" flexWrap="wrap" justifyContent="space-between" alignItems="center">
               <Box className="metric market">
+                {/* TODO: Figure out how to get MarketCap */}
                 <Typography variant="h6" color="textSecondary">
                   Market Cap
                 </Typography>
@@ -104,6 +105,7 @@ function TreasuryDashboard() {
               </Box>
 
               <Box className="metric price">
+                {/* TODO: Figure out how to get PSI Price */}
                 <Typography variant="h6" color="textSecondary">
                   PSI Price
                 </Typography>
@@ -114,6 +116,7 @@ function TreasuryDashboard() {
               </Box>
 
               <Box className="metric wsoprice">
+                {/* TODO: Figure out how to get wsPSI Price */}
                 <Typography variant="h6" color="textSecondary">
                   wsPSI Price
                   <InfoTooltip
@@ -129,6 +132,7 @@ function TreasuryDashboard() {
               </Box>
 
               <Box className="metric circ">
+                {/* TODO: Figure out how to get Circulating Supply */}
                 <Typography variant="h6" color="textSecondary">
                   Circulating Supply (total)
                 </Typography>
@@ -142,6 +146,7 @@ function TreasuryDashboard() {
               </Box>
 
               <Box className="metric bpo">
+                {/* TODO: Figure out how to get Backing per PSI*/}
                 <Typography variant="h6" color="textSecondary">
                   Backing per PSI
                 </Typography>
@@ -151,6 +156,7 @@ function TreasuryDashboard() {
               </Box>
 
               <Box className="metric index">
+                {/* TODO: Figure out how to get Current Index */}
                 <Typography variant="h6" color="textSecondary">
                   Current Index
                   <InfoTooltip
@@ -168,6 +174,7 @@ function TreasuryDashboard() {
         </Box>
 
         <Zoom in={true}>
+          {/* TODO: Figure out how to generate Total Value Deposited graph */}
           <Grid container spacing={2} className="data-grid">
             <Grid item lg={6} md={6} sm={12} xs={12}>
               <Paper className="psi-card psi-chart-card">
@@ -189,6 +196,7 @@ function TreasuryDashboard() {
 
             <Grid item lg={6} md={6} sm={12} xs={12}>
               <Paper className="psi-card psi-chart-card">
+                {/* TODO: Figure out how to generate Market Value of Treasury Assets graph */}
                 <Chart
                   type="stack"
                   data={data}
@@ -216,6 +224,7 @@ function TreasuryDashboard() {
             </Grid>
 
             <Grid item lg={6} md={6} sm={12} xs={12}>
+              {/* TODO: Figure out how to generate Risk Free Value of Treasury Assets graph */}
               <Paper className="psi-card psi-chart-card">
                 <Chart
                   type="stack"
@@ -240,6 +249,7 @@ function TreasuryDashboard() {
             </Grid>
 
             <Grid item lg={6} md={6} sm={12} xs={12}>
+              {/* TODO: Figure out how to generate Protocol Owned Liquidity PSI-DAI graph */}
               <Paper className="psi-card">
                 <Chart
                   type="area"
@@ -258,26 +268,9 @@ function TreasuryDashboard() {
                 />
               </Paper>
             </Grid>
-            {/*  Temporarily removed until correct data is in the graph */}
-            {/* <Grid item lg={6} md={12} sm={12} xs={12}>
-              <Paper className="psi-card">
-                <Chart
-                  type="bar"
-                  data={data}
-                  dataKey={["holders"]}
-                  headerText="Holders"
-                  stroke={[theme.palette.text.secondary]}
-                  headerSubText={`${data && data[0].holders}`}
-                  bulletpointColors={bulletpoints.holder}
-                  itemNames={tooltipItems.holder}
-                  itemType={""}
-                  infoTooltipMessage={tooltipInfoMessages.holder}
-                  expandedGraphStrokeColor={theme.palette.graphStrokeColor}
-                />
-              </Paper>
-            </Grid> */}
 
             <Grid item lg={6} md={6} sm={12} xs={12}>
+              {/* TODO: Figure out how to generate PSI Staked graph */}
               <Paper className="psi-card">
                 <Chart
                   type="area"
@@ -296,6 +289,7 @@ function TreasuryDashboard() {
             </Grid>
 
             <Grid item lg={6} md={6} sm={12} xs={12}>
+              {/* TODO: Figure out how to generate APY over time graph */}
               <Paper className="psi-card">
                 <Chart
                   type="line"
@@ -317,6 +311,7 @@ function TreasuryDashboard() {
             </Grid>
 
             <Grid item lg={6} md={6} sm={12} xs={12}>
+              {/* TODO: Figure out how to generate Runway Available graph */}
               <Paper className="psi-card">
                 <Chart
                   type="line"

@@ -6,7 +6,6 @@ import { ReactComponent as StakeIcon } from "../../assets/icons/stake.svg";
 import { ReactComponent as BondIcon } from "../../assets/icons/bond.svg";
 import { ReactComponent as DashboardIcon } from "../../assets/icons/dashboard.svg";
 import { ReactComponent as TridentIcon } from "../../assets/icons/trident-nav-header.svg";
-import { ReactComponent as PoolTogetherIcon } from "../../assets/icons/33-together.svg";
 import { trim, shorten } from "../../helpers";
 import { useAddress, useWeb3Context } from "src/hooks/web3Context";
 import useBonds from "../../hooks/Bonds";
@@ -40,6 +39,7 @@ function NavContent() {
         <div className="dapp-menu-top">
           <Box className="branding-header">
             <Link href="https://tridentdao.finance" target="_blank">
+              {/* TODO: Replace this icon with a real TridentIcon */}
               <SvgIcon
                 color="primary"
                 component={TridentIcon}
@@ -88,22 +88,6 @@ function NavContent() {
                   Stake
                 </Typography>
               </Link>
-
-              <Link
-                component={NavLink}
-                id="33-together-nav"
-                to="/33-together"
-                isActive={(match, location) => {
-                  return checkPage(match, location, "33-together");
-                }}
-                className={`button-dapp-menu ${isActive ? "active" : ""}`}
-              >
-                <Typography variant="h6">
-                  <SvgIcon color="primary" component={PoolTogetherIcon} />
-                  3,3 Together
-                </Typography>
-              </Link>
-
               <Link
                 component={NavLink}
                 id="bond-nav"
